@@ -19,4 +19,14 @@ public class Network implements INetwork {
     public void start() {
         listener.listen();
     }
+
+    @Override
+    public void request(Client client, byte[] data) {
+        decode(data);
+    }
+
+    private void decode(byte[] data) {
+        final String string = new String(data);
+        System.out.println(string);
+    }
 }

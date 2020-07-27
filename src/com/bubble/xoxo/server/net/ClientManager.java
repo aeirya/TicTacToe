@@ -11,5 +11,6 @@ public class ClientManager {
     }
     public void add(Client client) {
         clients.add(client);
+        client.start();
     }
 }

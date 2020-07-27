@@ -49,7 +49,7 @@ public class NetworkListener {
         while(isRunning) {
             try {
                 final Socket socket = serverListener.accept();
-                final Client client = new Client(socket);
+                final Client client = new Client(socket, server);
                 server.accept(client);
             }
             catch(IOException e) {
