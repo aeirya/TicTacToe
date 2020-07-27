@@ -1,11 +1,9 @@
 package com.bubble.xoxo.server.net;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class NetworkListener {
     private boolean isRunning;
@@ -28,20 +26,8 @@ public class NetworkListener {
         }
     }
 
-    private String getLocalAddr() {
-        InetAddress address;
-        try {
-            address = InetAddress.getLocalHost();
-        } catch (UnknownHostException e1) {
-            address = null;
-            e1.printStackTrace();
-        }
-        if (address != null) return address.getHostAddress();
-        else return "";
-    }
-
     private void connectLocal(int port) {
-        final String ip = getLocalAddr();
+        final String ip = "localhost";
         connect(ip, port);
     }
 
