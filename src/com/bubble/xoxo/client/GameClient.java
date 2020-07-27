@@ -19,5 +19,7 @@ public class GameClient {
     private void test() {
         final String text = "this is a test";
         network.send(text.getBytes());
+        final String text2 = "hmmm, another one";
+        network.send(text2.getBytes());
     }
 }

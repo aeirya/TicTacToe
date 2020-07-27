@@ -1,15 +1,18 @@
 package com.bubble.xoxo.server.net;
 
 import com.bubble.xoxo.net.connection.NetworkListener;
+import com.bubble.xoxo.server.IRequestHandler;
 
 public class Network implements INetwork {
 
     private final ClientManager clients;
     private final NetworkListener listener;
+    private final IRequestHandler handler;
 
-    public Network(int port) {
+    public Network(int port, IRequestHandler handler) {
         clients = new ClientManager();
         listener = new NetworkListener(this, port);
+        this.handler = handler;
     }
 
     public void accept(Client client) {
@@ -24,11 +27,11 @@ public class Network implements INetwork {
 
     @Override
     public void request(Client client, byte[] data) {
-        decode(data);
+        final String request = decode(data);
+        handler.handle(request);
     }
 
-    private void decode(byte[] data) {
-        final String string = new String(data);
-        System.out.println(string);
+    private String decode(byte[] data) {
+        return new String(data);
     }
 }
