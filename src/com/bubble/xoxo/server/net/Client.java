@@ -1,5 +1,8 @@
 package com.bubble.xoxo.server.net;
 
+import com.bubble.xoxo.net.connection.IDataReceiver;
+import com.bubble.xoxo.net.connection.NetworkConnection;
+
 import java.net.Socket;
 
 public class Client implements IDataReceiver {

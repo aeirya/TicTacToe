@@ -2,8 +2,8 @@ package com.bubble.xoxo.client.net;
 
 import java.net.Socket;
 
-import com.bubble.xoxo.server.net.IDataReceiver;
-import com.bubble.xoxo.server.net.NetworkConnection;
+import com.bubble.xoxo.net.connection.IDataReceiver;
+import com.bubble.xoxo.net.connection.NetworkConnection;
 
 public class Server implements IDataReceiver {
     private final Socket socket;

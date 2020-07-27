@@ -1,5 +1,7 @@
 package com.bubble.xoxo.server.net;
 
+import com.bubble.xoxo.net.connection.NetworkListener;
+
 public class Network implements INetwork {
 
     private final ClientManager clients;

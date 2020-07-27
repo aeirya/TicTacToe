@@ -1,4 +1,7 @@
-package com.bubble.xoxo.server.net;
+package com.bubble.xoxo.net.connection;
+
+import com.bubble.xoxo.server.net.Client;
+import com.bubble.xoxo.server.net.INetwork;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

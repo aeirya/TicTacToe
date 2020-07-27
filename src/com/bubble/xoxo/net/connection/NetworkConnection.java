@@ -1,4 +1,4 @@
-package com.bubble.xoxo.server.net;
+package com.bubble.xoxo.net.connection;
 
 import java.net.Socket;
 
@@ -19,7 +19,7 @@ public class NetworkConnection {
         isAlive = true;
         connect();
         listen();
-        holdOn();
+        // holdOn();
     }
 
     private void holdOn() {
