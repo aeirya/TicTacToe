@@ -32,6 +32,7 @@ public class ConnectionDispatcher {
 
     private void write(OutputStream out, byte[] data) throws IOException {
         out.write(data);
+        out.write("/end/".getBytes());
         out.flush();
     }
 }

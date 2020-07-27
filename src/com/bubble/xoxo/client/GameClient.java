@@ -19,7 +19,18 @@ public class GameClient {
     private void test() {
         final String text = "this is a test";
         network.send(text.getBytes());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         final String text2 = "hmmm, another one";
+        network.send(text2.getBytes());
+        network.send(text2.getBytes());
+        network.send(text2.getBytes());
+        network.send(text2.getBytes());
+        network.send(text2.getBytes());
         network.send(text2.getBytes());
     }
 }
