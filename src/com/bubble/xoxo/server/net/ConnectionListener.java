@@ -10,7 +10,7 @@ public class ConnectionListener {
     private final NetworkConnection connection;
     private boolean isRunning;
 
-    public ConnectionListener(NetworkConnection connection ,Socket socket) {
+    public ConnectionListener(NetworkConnection connection, Socket socket) {
         this.connection = connection;
         this.socket = socket;
     }
@@ -25,7 +25,9 @@ public class ConnectionListener {
         if (in == null) return;
         while (isRunning) {
             final byte[] data = read(in);
-            connection.receive(data);
+            if (data.length > 0) {
+                connection.receive(data);
+            }
         }
     }
 
@@ -39,10 +41,11 @@ public class ConnectionListener {
     }
 
     private byte[] read(InputStream in) {
-        final int len = 0x2000;
+        final int len = 0x1000;
         final byte[] data = new byte[len];
         try {
-            in.read(data, 0, len);
+            final int count = in.read(data, 0, len);
+            if (count < 0) return new byte[0];
             return data;
         } catch (IOException e) {
             e.printStackTrace();

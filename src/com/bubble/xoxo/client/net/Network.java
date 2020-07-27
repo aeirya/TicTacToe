@@ -18,10 +18,19 @@ public class Network implements INetwork {
     }
 
     private void connect(String ip, int port) {
-        try(Socket socket = new Socket(ip, port)) {
+        try {
+            Socket socket = new Socket(ip, port);
             server = new Server(socket);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void send(byte[] data) {
+        server.send(data);
+    }
+
+    public void disconnect() {
+        //
     }
 }

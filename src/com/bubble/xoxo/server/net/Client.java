@@ -2,7 +2,7 @@ package com.bubble.xoxo.server.net;
 
 import java.net.Socket;
 
-public class Client {
+public class Client implements IDataReceiver {
     private final NetworkConnection connection;
     private final INetwork server;
 
@@ -20,6 +20,6 @@ public class Client {
     }
 
     public void send(byte[] data) {
-        //      
+        connection.send(data);    
     }
 }

@@ -4,13 +4,13 @@ import java.net.Socket;
 
 public class NetworkConnection {
 
-    private final Client client;
+    private final IDataReceiver handler;
     private final ConnectionListener listener;
     private final ConnectionDispatcher dispatcher;
     private boolean isAlive;
 
-    public NetworkConnection(Client client, Socket socket) {
-        this.client = client;
+    public NetworkConnection(IDataReceiver receiver, Socket socket) {
+        this.handler = receiver;
         listener = new ConnectionListener(this, socket);
         dispatcher = new ConnectionDispatcher(socket);
     }
@@ -44,7 +44,7 @@ public class NetworkConnection {
     }
 
     public void receive(byte[] data) {
-        client.receive(data);
+        handler.receive(data);
     }
 
     public void send(byte[] data) {

@@ -13,5 +13,11 @@ public class GameClient {
 
     public void run() {
         network.connect();
+        test();
+    }
+
+    private void test() {
+        final String text = "this is a test";
+        network.send(text.getBytes());
     }
 }
