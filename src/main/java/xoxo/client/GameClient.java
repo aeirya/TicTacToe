@@ -1,7 +1,7 @@
-package com.bubble.xoxo.client;
+package xoxo.client;
 
-import com.bubble.xoxo.client.net.INetwork;
-import com.bubble.xoxo.client.net.Network;
+import xoxo.client.net.INetwork;
+import xoxo.client.net.Network;
 
 public class GameClient {
 

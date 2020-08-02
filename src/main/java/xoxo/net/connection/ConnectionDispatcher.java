@@ -1,4 +1,4 @@
-package com.bubble.xoxo.net.connection;
+package xoxo.net.connection;
 
 import java.io.IOException;
 import java.io.OutputStream;

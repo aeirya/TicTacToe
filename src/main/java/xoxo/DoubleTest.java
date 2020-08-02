@@ -1,7 +1,7 @@
-package com.bubble.xoxo;
+package xoxo;
 
-import com.bubble.xoxo.client.ClientMain;
-import com.bubble.xoxo.server.ServerMain;
+import xoxo.client.ClientMain;
+import xoxo.server.ServerMain;
 
 public class DoubleTest {
     public static void main(String[] args) {

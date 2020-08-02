@@ -1,4 +1,4 @@
-package com.bubble.xoxo.server.net;
+package xoxo.server.net;
 
 import java.util.ArrayList;
 import java.util.List;

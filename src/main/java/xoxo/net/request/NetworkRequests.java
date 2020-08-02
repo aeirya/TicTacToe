@@ -1,4 +1,4 @@
-package com.bubble.xoxo.net.request;
+package xoxo.net.request;
 
 public enum NetworkRequests {
     

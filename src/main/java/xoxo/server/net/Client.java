@@ -1,7 +1,7 @@
-package com.bubble.xoxo.server.net;
+package xoxo.server.net;
 
-import com.bubble.xoxo.net.connection.IDataReceiver;
-import com.bubble.xoxo.net.connection.NetworkConnection;
+import xoxo.net.connection.IDataReceiver;
+import xoxo.net.connection.NetworkConnection;
 
 import java.net.Socket;
 

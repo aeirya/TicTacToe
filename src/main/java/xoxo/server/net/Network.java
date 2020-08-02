@@ -1,7 +1,7 @@
-package com.bubble.xoxo.server.net;
+package xoxo.server.net;
 
-import com.bubble.xoxo.net.connection.NetworkListener;
-import com.bubble.xoxo.server.IRequestHandler;
+import xoxo.net.connection.NetworkListener;
+import xoxo.server.IRequestHandler;
 
 public class Network implements INetwork {
 

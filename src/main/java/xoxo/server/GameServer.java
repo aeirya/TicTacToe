@@ -1,7 +1,7 @@
-package com.bubble.xoxo.server;
+package xoxo.server;
 
-import com.bubble.xoxo.server.net.INetwork;
-import com.bubble.xoxo.server.net.Network;
+import xoxo.server.net.INetwork;
+import xoxo.server.net.Network;
 
 public class GameServer implements IRequestHandler {
 

@@ -1,4 +1,4 @@
-package com.bubble.xoxo.client;
+package xoxo.client;
 
 public class ClientMain {
     public static void main(String[] args) {

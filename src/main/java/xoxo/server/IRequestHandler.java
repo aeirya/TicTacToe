@@ -1,4 +1,4 @@
-package com.bubble.xoxo.server;
+package xoxo.server;
 
 public interface IRequestHandler {
     void handle(String request);
