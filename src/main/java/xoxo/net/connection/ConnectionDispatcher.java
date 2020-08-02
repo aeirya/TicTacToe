@@ -25,6 +25,8 @@ public class ConnectionDispatcher {
         try {
             out = getOutput();
             write(out, data);
+            flush(out);
+            end(out);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,7 +34,13 @@ public class ConnectionDispatcher {
 
     private void write(OutputStream out, byte[] data) throws IOException {
         out.write(data);
-        out.write("/end/".getBytes());
+    }
+
+    private void flush(OutputStream out) throws IOException {
         out.flush();
+    }
+
+    private void end(OutputStream out) throws IOException {
+        out.write(Protocol.PROTO_END.getBytes());
     }
 }

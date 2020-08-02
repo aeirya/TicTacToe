@@ -1,6 +1,7 @@
 package xoxo.server.net;
 
 import xoxo.net.connection.NetworkListener;
+import xoxo.net.connection.Protocol;
 import xoxo.server.IRequestHandler;
 
 public class Network implements INetwork {
@@ -27,8 +28,10 @@ public class Network implements INetwork {
 
     @Override
     public void request(Client client, byte[] data) {
-        final String request = decode(data);
-        handler.handle(request);
+        final String requests = decode(data);
+        for (String req : requests.split(Protocol.PROTO_END)) {
+            handler.handle(req);
+        }
     }
 
     private String decode(byte[] data) {

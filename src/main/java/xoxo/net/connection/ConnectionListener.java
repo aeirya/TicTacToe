@@ -40,8 +40,7 @@ public class ConnectionListener {
         }
     }
 
-    private byte[] read(InputStream in) {
-        final int len = 0x1000;
+    private byte[] read(InputStream in, int len) {
         final byte[] data = new byte[len];
         try {
             final int count = in.read(data, 0, len);
@@ -51,6 +50,11 @@ public class ConnectionListener {
             e.printStackTrace();
             return new byte[0];
         }
+    }
+
+    private byte[] read(InputStream in) {
+        final int len = 0x1000;
+        return read(in, len);
     }
 
     public void terminate() {
