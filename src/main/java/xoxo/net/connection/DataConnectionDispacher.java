@@ -13,7 +13,7 @@ public class DataConnectionDispacher implements IConnectionDispatcher {
         this.socket = socket;
     }
 
-    private DataOutputStream getOut() throws IOException {
+    private DataOutputStream getOutStream() throws IOException {
         final OutputStream out = socket.getOutputStream();
         return new DataOutputStream(out);
     }
@@ -21,8 +21,9 @@ public class DataConnectionDispacher implements IConnectionDispatcher {
     @Override
     public void send(byte[] data) {
         try {
-            final DataOutputStream out = getOut();
-            out.writeBytes(new String(data));
+            final DataOutputStream out = getOutStream();
+            out.writeInt(data.length);
+            out.write(data);
         } catch (IOException e) {
             e.printStackTrace();
         }

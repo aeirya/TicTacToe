@@ -26,6 +26,7 @@ public class ConnectionListener {
         isRunning = true;
         final InputStream in = getInStream();
         if (in == null) return;
+        
         while (isRunning) {
             final byte[] data = read(in);
             if (data.length > 0) {

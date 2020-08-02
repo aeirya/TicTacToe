@@ -28,22 +28,22 @@ public class DataConnectionListener implements IConnectionListener {
         try {
             final DataInputStream in = getInStream();
             while (isRunning) {
-                    final byte[] data = read(in);
-                    if (data.length > 0) {
-                        handler.receive(data);
-                    }    
+                final int len = in.readInt();
+                final byte[] data = new byte[len];
+                int count = 0;
+                while (count < len) {
+                    count += in.read(data, 0, len);
+                }    
+                handler.receive(data);
             }
         } catch(IOException e) {
             e.printStackTrace();
         }
     }
 
-    private byte[] read(DataInputStream in) throws IOException {
-        return in.readAllBytes();
-    }
-
     @Override
     public void terminate() {
+        isRunning = false;
         try {
             getInStream().close();
         } catch (IOException e) {
