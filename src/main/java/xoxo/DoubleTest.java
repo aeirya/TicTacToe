@@ -5,7 +5,11 @@ import xoxo.server.ServerMain;
 
 public class DoubleTest {
     public static void main(String[] args) {
-        ServerMain.main(args);
-        ClientMain.main(args);
+        new Thread(
+            () -> ServerMain.main(args)
+        ).start();
+        new Thread(
+            () -> ClientMain.main(args)
+        ).start();
     }
 }

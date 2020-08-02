@@ -2,17 +2,17 @@ package xoxo.net.connection;
 
 import java.net.Socket;
 
-public class NetworkConnection {
+public class NetworkConnection implements IDataReceiver {
 
     private final IDataReceiver handler;
-    private final ConnectionListener listener;
-    private final ConnectionDispatcher dispatcher;
+    private final IConnectionListener listener;
+    private final IConnectionDispatcher dispatcher;
     private boolean isAlive;
 
     public NetworkConnection(IDataReceiver receiver, Socket socket) {
         this.handler = receiver;
-        listener = new ConnectionListener(this, socket);
-        dispatcher = new ConnectionDispatcher(socket);
+        listener = new DataConnectionListener(this, socket);
+        dispatcher = new DataConnectionDispacher(socket);
     }
 
     public void start() {

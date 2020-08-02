@@ -1,5 +1,8 @@
 package xoxo.net.connection;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -43,9 +46,14 @@ public class ConnectionListener {
     private byte[] read(InputStream in, int len) {
         final byte[] data = new byte[len];
         try {
-            final int count = in.read(data, 0, len);
-            if (count < 0) return new byte[0];
-            return data;
+            final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            while (true) {
+                final int count = in.read(data);
+                // new DataInputStream(in)
+                baos.write(data, 0, count);
+                if (count < 0) break;
+            }
+            return baos.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();
             return new byte[0];
