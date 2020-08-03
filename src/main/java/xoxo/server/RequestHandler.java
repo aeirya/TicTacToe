@@ -1,10 +1,17 @@
 package xoxo.server;
 
+import xoxo.net.request.Request;
+import xoxo.net.request.user.IUserManager;
+
 public class RequestHandler implements IRequestHandler {
 
-    @Override
-    public void handle(String request) {
-        System.out.println("received request:\n" + request);
+    private final IUserManager usermanager;
+
+    public RequestHandler() {
+        usermanager = null;
     }
-    
+
+    public void handle(Request request) {
+        System.out.println("handing request with type: " + request.type);
+    }
 }

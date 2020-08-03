@@ -1,5 +1,6 @@
 package xoxo.server;
 
+import xoxo.net.request.Request;
 import xoxo.server.net.INetwork;
 import xoxo.server.net.Network;
 
@@ -18,7 +19,7 @@ public class GameServer implements IRequestHandler {
     }
 
     @Override
-    public void handle(String request) {
+    public void handle(Request request) {
         core.handle(request);
     }
 }
