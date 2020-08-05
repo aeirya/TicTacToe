@@ -2,8 +2,6 @@ package xoxo.client.net;
 
 import java.util.logging.Logger;
 
-import javax.xml.namespace.QName;
-
 import com.google.gson.Gson;
 
 import xoxo.net.request.NetRequest;
@@ -21,13 +19,12 @@ public class Network {
     }
 
     private INetworkService initiateNetworkService(String ip, int port) {
-        // TODO: also pass an response handler
         return new NetworkService(ip, port);
     }
 
     public void connect() {
         server.connect();
-        System.out.println("connected");
+        Logger.getLogger("client").info("connected");
         final Response response = server.getNext();
         if (response.type == NetResponse.OK) {
             auth = response.body;  

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import xoxo.net.request.NetRequest;
 import xoxo.net.request.Request;
+import xoxo.net.response.Response;
 
 public abstract class UserRequest extends Request {
 
@@ -15,9 +16,13 @@ public abstract class UserRequest extends Request {
         super(type, body);
     }
 
+    protected UserRequest(Request request) {
+        super(request);
+    }
+
     public User getUser() {
         return new Gson().fromJson(body, User.class);
     }
 
-    public abstract void apply(IUserManager manager);
+    public abstract Response apply(IUserManager manager);
 }

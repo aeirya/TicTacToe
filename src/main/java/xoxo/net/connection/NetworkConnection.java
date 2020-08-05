@@ -19,20 +19,6 @@ public class NetworkConnection implements IDataReceiver {
         isAlive = true;
         connect();
         listen();
-        // holdOn();
-    }
-
-    private void holdOn() {
-        while (isAlive) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                isAlive = false;
-                Thread.currentThread().interrupt();
-                e.printStackTrace();
-            }
-        }
-        terminate();
     }
 
     private void connect() {
@@ -53,5 +39,11 @@ public class NetworkConnection implements IDataReceiver {
 
     public void terminate() {
         listener.terminate();
+        this.isAlive = false;
+        // this doesn't have any purpose really..
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 }

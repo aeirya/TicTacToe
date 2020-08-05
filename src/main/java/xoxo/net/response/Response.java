@@ -17,6 +17,12 @@ public class Response {
         this.type = type;
         this.body = body;
     }
+    
+    public Response(String body) {
+        this.type = NetResponse.OK;
+        this.body = body;
+    }
+
 
     public String toString() {
         return new Gson().toJson(this);

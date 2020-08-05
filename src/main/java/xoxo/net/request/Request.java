@@ -17,6 +17,12 @@ public class Request {
         this.body = new Gson().toJson(body);
     }
 
+    protected Request(Request request) {
+        this.body = request.body;
+        this.authToken = request.authToken;
+        this.type = request.type;
+    }
+
     public Request sign(String auth) {
         this.authToken = auth;
         return this;

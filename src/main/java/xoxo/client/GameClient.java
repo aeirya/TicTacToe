@@ -1,5 +1,7 @@
 package xoxo.client;
 
+import java.util.logging.Logger;
+
 import xoxo.client.net.Network;
 import xoxo.net.request.user.LoginRequest;
 
@@ -19,6 +21,7 @@ public class GameClient {
     public void test2() {
         network.request(new LoginRequest("aeirya", "1234"));
         network.request(new LoginRequest("arya", "1234"));
-        System.out.println(network.getResponse() + "\n" + network.getResponse());
+        final String msg1 = network.getResponse().body;
+        Logger.getGlobal().info(() -> msg1 + "\n" + network.getResponse().body);
     }
 }
