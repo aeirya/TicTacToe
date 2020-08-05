@@ -1,9 +1,15 @@
 package xoxo.client.net;
 
+import java.util.logging.Logger;
+
+import javax.xml.namespace.QName;
+
 import com.google.gson.Gson;
 
 import xoxo.net.request.NetRequest;
 import xoxo.net.request.Request;
+import xoxo.net.response.NetResponse;
+import xoxo.net.response.Response;
 
 public class Network {
 
@@ -21,6 +27,11 @@ public class Network {
 
     public void connect() {
         server.connect();
+        System.out.println("connected");
+        final Response response = server.getNext();
+        if (response.type == NetResponse.OK) {
+            auth = response.body;  
+        }
     }
 
     public void request(Request request) {
@@ -31,6 +42,10 @@ public class Network {
 
     public void request(NetRequest type, String body) {
         request(new Request(type, body));
+    }
+
+    public Response getResponse() {
+        return server.getNext();
     }
 
     private String parse(Request request) {

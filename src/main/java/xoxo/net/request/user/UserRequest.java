@@ -11,7 +11,11 @@ public abstract class UserRequest extends Request {
         super(type, user);
     }
 
-    protected User getUser() {
+    public UserRequest(NetRequest type, String body) {
+        super(type, body);
+    }
+
+    public User getUser() {
         return new Gson().fromJson(body, User.class);
     }
 

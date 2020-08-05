@@ -10,8 +10,8 @@ public class GameServer implements IRequestHandler {
     private final IRequestHandler core;
 
     public GameServer(int port) {
-        core = new RequestHandler();
         net = new Network(port, this);
+        core = new RequestHandler(net);
     }
 
     public void run() {

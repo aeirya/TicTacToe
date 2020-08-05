@@ -14,6 +14,7 @@ public class Server implements IDataReceiver {
         this.socket = socket;
         this.netService = networkService;
         this.connection = new NetworkConnection(this, socket);
+        this.connection.start();
     }
 
     @Override

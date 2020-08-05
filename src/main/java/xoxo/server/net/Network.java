@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 
 import xoxo.net.connection.NetworkListener;
 import xoxo.net.request.Request;
+import xoxo.net.response.NetResponse;
+import xoxo.net.response.Response;
 import xoxo.server.IRequestHandler;
 
 public class Network implements INetwork {
@@ -21,6 +23,12 @@ public class Network implements INetwork {
     public void accept(Client client) {
         clients.add(client);
         System.out.println("client accepted");
+        sendToken(client);
+    }
+
+    public void sendToken(Client client) {
+        final Response response = new Response(NetResponse.OK, client.getAuth());
+        client.send(response.getBytes());
     }
 
     @Override

@@ -13,9 +13,12 @@ public class GameClient {
 
     public void run() {
         network.connect();
+        test2();
     }
 
     public void test2() {
         network.request(new LoginRequest("aeirya", "1234"));
+        network.request(new LoginRequest("arya", "1234"));
+        System.out.println(network.getResponse() + "\n" + network.getResponse());
     }
 }

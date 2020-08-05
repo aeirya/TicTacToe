@@ -8,6 +8,10 @@ public class LoginRequest extends UserRequest {
         super(NetRequest.LOGIN, new User(username, password));
     }
 
+    public LoginRequest(String body) {
+        super(NetRequest.LOGIN, body);
+    }
+
     public void apply(IUserManager manager) {
         final User user = getUser();
         final String username = user.username;
