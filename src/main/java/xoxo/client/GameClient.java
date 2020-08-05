@@ -1,37 +1,27 @@
 package xoxo.client;
 
-import xoxo.client.net.INetwork;
+import java.util.logging.Logger;
+
 import xoxo.client.net.Network;
+import xoxo.net.request.user.LoginRequest;
 
 public class GameClient {
 
-    private final INetwork network;
-
+    private final Network network;
+    
     public GameClient(String ip, int port) {
         network = new Network(ip, port);
     }
 
     public void run() {
         network.connect();
-        test();
+        test2();
     }
 
-    public void test() {
-        final String text = "this is a test";
-        network.send(text.getBytes());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            e.printStackTrace();
-        }
-        final String text2 = "hmmm, another one";
-        
-        network.send(text2.getBytes());
-        network.send(text2.getBytes());
-        network.send(text2.getBytes());
-        network.send(text2.getBytes());
-        network.send(text2.getBytes());
-        network.send(text2.getBytes());
+    public void test2() {
+        network.request(new LoginRequest("aeirya", "1234"));
+        network.request(new LoginRequest("arya", "1234"));
+        final String msg1 = network.getResponse().body;
+        Logger.getGlobal().info(() -> msg1 + "\n" + network.getResponse().body);
     }
 }

@@ -1,36 +1,51 @@
 package xoxo.client.net;
 
-import java.io.IOException;
-import java.net.Socket;
+import java.util.logging.Logger;
 
-public class Network implements INetwork {
-    private final String ip;
-    private final int port;
-    private Server server;
+import com.google.gson.Gson;
 
+import xoxo.net.request.NetRequest;
+import xoxo.net.request.Request;
+import xoxo.net.response.NetResponse;
+import xoxo.net.response.Response;
+
+public class Network {
+
+    private final INetworkService server;
+    private String auth;
+    
     public Network(String ip, int port) {
-        this.ip = ip;
-        this.port = port;
+        server = initiateNetworkService(ip, port);
+    }
+
+    private INetworkService initiateNetworkService(String ip, int port) {
+        return new NetworkService(ip, port);
     }
 
     public void connect() {
-        connect(ip, port);
-    }
-
-    private void connect(String ip, int port) {
-        try {
-            Socket socket = new Socket(ip, port);
-            server = new Server(socket);
-        } catch (IOException e) {
-            e.printStackTrace();
+        server.connect();
+        Logger.getLogger("client").info("connected");
+        final Response response = server.getNext();
+        if (response.type == NetResponse.OK) {
+            auth = response.body;  
         }
     }
 
-    public void send(byte[] data) {
-        server.send(data);
+    public void request(Request request) {
+        server.send(
+            parse(request.sign(auth))
+        );
     }
 
-    public void disconnect() {
-        //
+    public void request(NetRequest type, String body) {
+        request(new Request(type, body));
+    }
+
+    public Response getResponse() {
+        return server.getNext();
+    }
+
+    private String parse(Request request) {
+        return new Gson().toJson(request);
     }
 }

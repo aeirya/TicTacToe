@@ -1,16 +1,26 @@
 package xoxo.server.net;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ClientManager {
-    private final List<Client> clients;
+    private final Map<String, Client> clients;
     
     public ClientManager() {
-        clients = new ArrayList<>();
+        clients = new HashMap<>();
     }
     public void add(Client client) {
-        clients.add(client);
+        // i could change this
+        client.setAuth(generateAuth());
+        clients.put(client.getAuth(), client);
         client.start();
+    }
+
+    private String generateAuth() {
+        return "auth";
+    }
+
+    public Client find(String auth) {
+        return clients.get(auth);
     }
 }

@@ -1,6 +1,4 @@
-package xoxo.server;
-
-import xoxo.net.request.Request;
+package xoxo.net.request;
 
 public interface IRequestHandler {
     void handle(Request request);
