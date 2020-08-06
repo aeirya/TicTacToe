@@ -2,8 +2,14 @@ package xoxo.game;
 
 public class Player {
     private Sign sign;
+    private final String name;
+    
+    public Player(String name) {
+        this.name = name;
+    }
 
-    public Player(Sign sign) {
+    public Player(String name, Sign sign) {
+        this.name = name;
         this.sign = sign;
     }
 
@@ -17,5 +23,9 @@ public class Player {
 
     public void setSign(Sign sign) {
         this.sign = sign;
+    }
+
+    public String getName() {
+        return name;
     }
 }

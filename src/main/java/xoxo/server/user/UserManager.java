@@ -19,7 +19,7 @@ import xoxo.util.resource.UserLoader;
 public class UserManager implements IUserManager {
 
     private final Map<String, User> users;
-    private final List<Player> onlineUsers;
+    private final List<OnlineUser> onlineUsers;
     private static final String USERS_DIR = "users/";
 
     public UserManager() {
@@ -60,7 +60,7 @@ public class UserManager implements IUserManager {
         if (! users.containsKey(username)) return false;
         if (! authenticate(username, password)) return false;
         if (onlineUsers.stream().anyMatch(user -> user.getUsername().equals(username))) return false;
-        onlineUsers.add(new Player(username));
+        onlineUsers.add(new OnlineUser(username));
         Logger.getGlobal().info(() -> username + " logged in");
         return true;
     }
@@ -83,7 +83,12 @@ public class UserManager implements IUserManager {
     }
 
     public List<String> getOnlineUsers() {
-        return onlineUsers.stream().map(Player::getUsername).collect(Collectors.toList());
+        return onlineUsers.stream().map(OnlineUser::getUsername).collect(Collectors.toList());
+    }
+    
+    public OnlineUser getOnlineUser(String username) {
+        if(isOnline(username)) return onlineUsers.parallelStream().filter(u-> u.getUsername().equals(username)).collect(Collectors.toList()).get(0);
+        else return null;
     }
 
     public boolean isOnline(String username) {

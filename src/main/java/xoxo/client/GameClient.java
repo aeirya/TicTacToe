@@ -3,6 +3,7 @@ package xoxo.client;
 import java.util.logging.Logger;
 
 import xoxo.client.net.Network;
+import xoxo.client.net.ServerAPI;
 import xoxo.net.request.NetRequest;
 import xoxo.net.request.Request;
 import xoxo.net.request.user.LoginRequest;
@@ -12,9 +13,11 @@ import xoxo.net.request.user.SignupRequest;
 public class GameClient {
 
     private final Network network;
-    
+    protected final ServerAPI server;
+
     public GameClient(String ip, int port) {
         network = new Network(ip, port);
+        server = new ServerAPI(network);
     }
 
     public void run() {
@@ -22,7 +25,7 @@ public class GameClient {
         // test2();
         // test3();
         // test4();
-
+        // test6();
     }
 
     public void test2() {
@@ -59,7 +62,12 @@ public class GameClient {
 
     public void test5() {
         network.request(new LoginRequest("arya", "1234"));
-        network.request(new Request(NetRequest.PLAY_GAME));
+        network.request(new Request(NetRequest.START_GAME));
+        
+    }
 
+    public void test6() {
+        // server.login("arya", "1234");
+        server.findMatch();
     }
 }
