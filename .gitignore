@@ -24,3 +24,15 @@ hs_err_pid*
 
 # Mac os files
 .DS_Store*
+.idea
+<<<<<<< HEAD
+
+.VSCodeCounter/
+.gradle/
+.project
+.vscode/
+=======
+.VSCodeCounter
+.vscode
+.gradle
+>>>>>>> proto
