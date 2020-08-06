@@ -1,13 +1,16 @@
 package xoxo.server.net;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ClientManager {
     private final Map<String, Client> clients;
-    
+    private final SecureRandom random;
+
     public ClientManager() {
         clients = new HashMap<>();
+        random = new SecureRandom();
     }
     public void add(Client client) {
         // i could change this
@@ -17,7 +20,9 @@ public class ClientManager {
     }
 
     private String generateAuth() {
-        return "auth";
+        final byte[] bytes = new byte[10];
+        random.nextBytes(bytes);
+        return new String(bytes);
     }
 
     public Client find(String auth) {

@@ -1,8 +1,11 @@
 package xoxo.server;
 
 import xoxo.net.request.Request;
+import xoxo.net.request.user.DeleteRequest;
 import xoxo.net.request.user.IUserManager;
 import xoxo.net.request.user.LoginRequest;
+import xoxo.net.request.user.LogoutRequest;
+import xoxo.net.request.user.SignupRequest;
 import xoxo.net.response.Response;
 import xoxo.server.net.INetwork;
 
@@ -25,6 +28,11 @@ public class RequestHandler implements IRequestHandler {
             case LOGIN:
             return new LoginRequest(request).apply(usermanager);
             case REGISTER:
+            return new SignupRequest(request).apply(usermanager);
+            case DELETE:
+            return new DeleteRequest(request).apply(usermanager);
+            case LOGOUT:
+            return new LogoutRequest(request).apply(usermanager);
             default:
             return null;
         }
@@ -32,6 +40,5 @@ public class RequestHandler implements IRequestHandler {
 
     public void respond(Response response, String auth) {
         net.respond(response.toString(), auth);
-    } 
-
+    }
 }
