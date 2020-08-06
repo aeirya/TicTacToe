@@ -3,6 +3,8 @@ package xoxo.client;
 import java.util.logging.Logger;
 
 import xoxo.client.net.Network;
+import xoxo.net.request.NetRequest;
+import xoxo.net.request.Request;
 import xoxo.net.request.user.LoginRequest;
 import xoxo.net.request.user.LogoutRequest;
 import xoxo.net.request.user.SignupRequest;
@@ -19,7 +21,8 @@ public class GameClient {
         network.connect();
         // test2();
         // test3();
-        test4();
+        // test4();
+
     }
 
     public void test2() {
@@ -52,5 +55,11 @@ public class GameClient {
         while (true) {
             System.out.println(network.getResponse().body);
         }
+    }
+
+    public void test5() {
+        network.request(new LoginRequest("arya", "1234"));
+        network.request(new Request(NetRequest.PLAY_GAME));
+
     }
 }

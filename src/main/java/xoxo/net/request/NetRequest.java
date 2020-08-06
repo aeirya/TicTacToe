@@ -6,4 +6,6 @@ public enum NetRequest {
     DELETE,
     LOGOUT,
     
+    PLAY_GAME,
+
 }

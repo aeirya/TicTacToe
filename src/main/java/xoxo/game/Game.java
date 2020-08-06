@@ -15,4 +15,8 @@ public class Game {
         home.setSign(sign);
         away.setSign(sign.flip());
     }
+
+    public void play(Player player, int x, int y) {
+        board.play(player, x, y);
+    }
 }

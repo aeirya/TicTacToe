@@ -1,4 +1,4 @@
-package xoxo.server;
+package xoxo.server.user;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import xoxo.util.resource.UserLoader;
 public class UserManager implements IUserManager {
 
     private final Map<String, User> users;
-    private final List<User> onlineUsers;
+    private final List<Player> onlineUsers;
     private static final String USERS_DIR = "users/";
 
     public UserManager() {
@@ -59,8 +59,8 @@ public class UserManager implements IUserManager {
     public boolean login(String username, String password) {
         if (! users.containsKey(username)) return false;
         if (! authenticate(username, password)) return false;
-        if (onlineUsers.stream().anyMatch(user -> user.username.equals(username))) return false;
-        onlineUsers.add(new User(username, password));
+        if (onlineUsers.stream().anyMatch(user -> user.getUsername().equals(username))) return false;
+        onlineUsers.add(new Player(username));
         Logger.getGlobal().info(() -> username + " logged in");
         return true;
     }
@@ -83,7 +83,7 @@ public class UserManager implements IUserManager {
     }
 
     public List<String> getOnlineUsers() {
-        return onlineUsers.stream().map(user -> user.username).collect(Collectors.toList());
+        return onlineUsers.stream().map(Player::getUsername).collect(Collectors.toList());
     }
 
     public boolean isOnline(String username) {
@@ -93,7 +93,7 @@ public class UserManager implements IUserManager {
     public boolean logout(String username, String password) {
         if (! authenticate(username, password)) return false;
         if (! isOnline(username)) return false; 
-        onlineUsers.removeIf(u -> u.username.equals(username));
+        onlineUsers.removeIf(u -> u.getUsername().equals(username));
         return true;
     }
 }

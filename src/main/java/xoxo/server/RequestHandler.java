@@ -12,6 +12,7 @@ import xoxo.server.net.INetwork;
 public class RequestHandler implements IRequestHandler {
 
     private final IUserManager usermanager;
+    private final MatchFinder matcher;
     private final INetwork net;
 
     public RequestHandler(INetwork net) {
@@ -33,6 +34,10 @@ public class RequestHandler implements IRequestHandler {
             return new DeleteRequest(request).apply(usermanager);
             case LOGOUT:
             return new LogoutRequest(request).apply(usermanager);
+            case PLAY_GAME:
+            // user        
+            // return new Response(matcher.queue(request.getAuth()))
+            return null;
             default:
             return null;
         }
