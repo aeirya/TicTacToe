@@ -1,9 +1,10 @@
 package xoxo.game;
 
 public class Player {
-    private Sign sign;
     private final String name;
-    
+    private Sign sign;
+    private boolean isHasTurn = false;
+
     public Player(String name) {
         this.name = name;
     }
@@ -15,6 +16,7 @@ public class Player {
 
     public void sign(Block block) {
         block.fill(sign);
+        isHasTurn = false;
     }
 
     public Sign getSign() {
@@ -27,5 +29,13 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void toggleHasTurn() {
+        isHasTurn = true;
+    }
+
+    public boolean hasTurn() {
+        return isHasTurn;
     }
 }

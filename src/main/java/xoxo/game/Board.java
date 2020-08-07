@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import xoxo.net.request.game.BoardState;
+
 
 public class Board {
     
-    private static final int N = 7;
-    private static final int WINNING_LIMIT = 4;
+    private final int N = 7;
+    private final int WINNING_LIMIT = 4;
 
     private final List<Block> blocks;
 
@@ -87,5 +89,13 @@ public class Board {
 
     private boolean checkLine(List<Block> line, Sign sign) {
         return subs(line).stream().anyMatch(sub -> allMatch(sub, sign));
+    }
+
+    private List<Block> getFilledBlocks() {
+        return blocks.stream().filter(Block::isFilled).collect(Collectors.toList());
+    }
+
+    public BoardState getState() {
+        return new BoardState(getFilledBlocks(), N);
     }
 }

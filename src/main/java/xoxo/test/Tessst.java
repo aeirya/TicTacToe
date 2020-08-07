@@ -3,7 +3,7 @@ package xoxo.test;
 import java.io.IOException;
 
 import xoxo.client.GameClient;
-import xoxo.game.Game;
+import xoxo.net.request.game.GameState;
 import xoxo.server.ServerMain;
 
 public class Tessst {
@@ -47,8 +47,11 @@ public class Tessst {
                 case 1:
                 c.get().play(read(), read());
                 break;
+                case 3:
+                c2.get().play(read(), read());
+                break;
                 case 2:
-                Game game = c.get().getUpdate();
+                GameState game = c.get().getUpdate();
                 if (game == null) System.err.println("no update");
                 else {
                     System.out.println(game.toString());

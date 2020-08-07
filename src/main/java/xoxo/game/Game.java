@@ -4,10 +4,13 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import xoxo.net.request.game.GameState;
+
 public class Game {
     private final Board board;
-    private Player home;
-    private Player away;
+    private final Player home;
+    private final Player away;
+    
     private String winner = null;
     private boolean isUpdated = false;
 
@@ -25,21 +28,25 @@ public class Game {
 
     public void setHomePlayer(Sign sign) {
         home.setSign(sign);
+        home.toggleHasTurn();
         away.setSign(sign.flip());
     }
 
     public void play(Player player, int x, int y) {
         Logger.getGlobal().info(() -> player.getName() +  " playing " + x + " ," + y);
-        board.play(player, x, y);
-        if(board.checkWin(x, y, player)) {
-            win(player);
+        if(player.hasTurn()) {
+            board.play(player, x, y);
+            getOpponent(player).toggleHasTurn();
+            if(board.checkWin(x, y, player)) {
+                win(player);
+            }
+            isUpdated = false;
         }
-        isUpdated = false;
     }
 
     private void win(Player player) {
         Logger.getGlobal().info(
-            ()-> "Player " + player.getSign().toString() + " won");
+            () -> "Player " + player.getSign().toString() + " won");
     }
 
     public boolean isToBeUpdated() {
@@ -53,5 +60,19 @@ public class Game {
     @Override
     public String toString() {
         return new Gson().toJson(this);
+    }
+
+    public Player getPlayer(String name) {
+        if (home.getName().equals(name)) return home;
+        if (away.getName().equals(name)) return away;
+        return null;
+    }
+
+    public Player getOpponent(Player player) {
+        return home.getName().equals(player.getName()) ? away : home;
+    }
+
+    public GameState getState(Player player) {
+        return new GameState(player, getOpponent(player), winner, board.getState());
     }
 }
