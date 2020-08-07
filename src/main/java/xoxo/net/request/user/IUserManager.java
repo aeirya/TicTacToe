@@ -1,5 +1,7 @@
 package xoxo.net.request.user;
 
+import java.util.Map;
+
 import xoxo.server.user.OnlineUser;
 
 public interface IUserManager {
@@ -10,4 +12,5 @@ public interface IUserManager {
     boolean logout(String username, String password);
     OnlineUser getOnlineUser(String username);
     OnlineUser findUserWithAuth(String auth);
+    Map<String, Boolean> getOnlineStatus();
 }

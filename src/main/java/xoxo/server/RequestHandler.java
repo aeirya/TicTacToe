@@ -4,6 +4,7 @@ import xoxo.net.request.Request;
 import xoxo.net.request.game.GetUpdateRequest;
 import xoxo.net.request.game.PlayRequest;
 import xoxo.net.request.menu.FindMatchRequest;
+import xoxo.net.request.menu.GetScoreboardRequest;
 import xoxo.net.request.user.DeleteRequest;
 import xoxo.net.request.user.IUserManager;
 import xoxo.net.request.user.LoginRequest;
@@ -11,6 +12,7 @@ import xoxo.net.request.user.LogoutRequest;
 import xoxo.net.request.user.SignupRequest;
 import xoxo.net.response.Response;
 import xoxo.server.net.INetwork;
+import xoxo.server.score.Scoreboard;
 import xoxo.server.user.OnlineUser;
 import xoxo.server.user.UserManager;
 
@@ -19,10 +21,12 @@ public class RequestHandler implements IRequestHandler {
     private final IUserManager usermanager;
     private final MatchFinder matcher;
     private final INetwork net;
+    private final Scoreboard scoreboard;
 
     public RequestHandler(INetwork net) {
         this.net = net;
         usermanager = new UserManager();
+        scoreboard = new Scoreboard();
         matcher = new MatchFinder(usermanager);
     }
 
@@ -40,6 +44,9 @@ public class RequestHandler implements IRequestHandler {
             return new DeleteRequest(request).apply(usermanager);
             case LOGOUT:
             return new LogoutRequest(request).apply(usermanager);
+            case GET_SCOREBOARD:
+            return new GetScoreboardRequest(request)
+                .apply(getUser(request), scoreboard, usermanager);
             case FIND_MATCH:
             return new FindMatchRequest(request).apply(matcher);
             case PLAY:

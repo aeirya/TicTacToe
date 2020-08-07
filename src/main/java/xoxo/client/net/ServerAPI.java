@@ -5,6 +5,8 @@ import xoxo.net.request.Request;
 import xoxo.net.request.game.GameState;
 import xoxo.net.request.game.GetUpdateRequest;
 import xoxo.net.request.game.PlayRequest;
+import xoxo.net.request.menu.GetScoreboardRequest;
+import xoxo.net.request.menu.ScorebaordState;
 import xoxo.net.request.user.LoginRequest;
 import xoxo.net.request.user.SignupRequest;
 import xoxo.net.response.NetResponse;
@@ -63,5 +65,15 @@ public class ServerAPI {
         } else {
             return null;
         }
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public ScorebaordState getScoreboard() {
+        net.request(new GetScoreboardRequest());
+        final Response r = getResponse();
+        return new ScorebaordState(r.body);
     }
 }

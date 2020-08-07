@@ -7,6 +7,8 @@ public enum NetRequest {
     LOGOUT,
     
     FIND_MATCH,
+    GET_SCOREBOARD,
+
     PLAY,
     GET_UPDATE,
     

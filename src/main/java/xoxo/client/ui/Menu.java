@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Menu {
+public abstract class Menu {
 
     private final Map<Integer, ICommand> map;
 
@@ -31,7 +31,11 @@ public class Menu {
         return map.keySet().stream().sorted().map(map::get).collect(Collectors.toList());
     }
 
-    public void print(PrintWriter out) {
+    public void printCommands(PrintWriter out) {
         IntStream.range(0, map.size()).forEach(i -> map.get(i).print(i, out));
+    }
+
+    public void print(PrintWriter out) {
+        //
     }
 }
