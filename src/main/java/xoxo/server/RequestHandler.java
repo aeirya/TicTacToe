@@ -1,6 +1,7 @@
 package xoxo.server;
 
 import xoxo.net.request.Request;
+import xoxo.net.request.game.GetUpdateRequest;
 import xoxo.net.request.game.PlayRequest;
 import xoxo.net.request.menu.FindMatchRequest;
 import xoxo.net.request.user.DeleteRequest;
@@ -44,6 +45,8 @@ public class RequestHandler implements IRequestHandler {
             case PLAY:
             final OnlineUser user = getUser(request);
             return new PlayRequest(request).apply(user);
+            case GET_UPDATE:
+            return new GetUpdateRequest(request).apply(getUser(request));
             default:
             return null;
         }

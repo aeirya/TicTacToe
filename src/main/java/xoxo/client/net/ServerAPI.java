@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import xoxo.game.Game;
 import xoxo.net.request.NetRequest;
 import xoxo.net.request.Request;
+import xoxo.net.request.game.GetUpdateRequest;
 import xoxo.net.request.game.PlayRequest;
 import xoxo.net.request.user.LoginRequest;
 import xoxo.net.request.user.SignupRequest;
@@ -57,6 +58,12 @@ public class ServerAPI {
     }
 
     public Game getUpdate() {
-        return new Gson().fromJson(getResponse().body, Game.class);
+        net.request(new GetUpdateRequest());
+        final Response response = getResponse();
+        if (response.type.equals(NetResponse.OK)) {
+            return new Gson().fromJson(response.body, Game.class);
+        } else {
+            return null;
+        }
     }
 }

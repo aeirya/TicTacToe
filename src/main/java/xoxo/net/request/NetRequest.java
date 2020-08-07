@@ -8,4 +8,6 @@ public enum NetRequest {
     
     FIND_MATCH,
     PLAY,
+    GET_UPDATE,
+    
 }

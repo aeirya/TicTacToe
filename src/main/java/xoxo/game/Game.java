@@ -9,6 +9,7 @@ public class Game {
     private Player home;
     private Player away;
     private String winner = null;
+    private boolean isUpdated = false;
 
     public Game() {
         home = null;
@@ -33,11 +34,20 @@ public class Game {
         if(board.checkWin(x, y, player)) {
             win(player);
         }
+        isUpdated = false;
     }
 
     private void win(Player player) {
         Logger.getGlobal().info(
             ()-> "Player " + player.getSign().toString() + " won");
+    }
+
+    public boolean isToBeUpdated() {
+        if (isUpdated) return false;
+        else {
+            isUpdated = true;
+            return true;
+        }
     }
 
     @Override
