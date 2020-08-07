@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import xoxo.game.Game;
 import xoxo.game.Player;
+import xoxo.game.Sign;
 import xoxo.net.request.user.IUserManager;
 import xoxo.server.user.OnlineUser;
 
@@ -48,6 +49,7 @@ public class MatchFinder {
         Game game = new Game(p1, p2);
         u1.startMatch(game, p1);
         u2.startMatch(game, p2);
+        game.setHomePlayer(Sign.X);
         System.out.println("match started");
     }
 

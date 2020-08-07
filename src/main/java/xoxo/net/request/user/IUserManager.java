@@ -9,4 +9,5 @@ public interface IUserManager {
     boolean authenticate(String username, String password);
     boolean logout(String username, String password);
     OnlineUser getOnlineUser(String username);
+    OnlineUser findUserWithAuth(String auth);
 }

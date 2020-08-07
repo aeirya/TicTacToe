@@ -1,7 +1,11 @@
 package xoxo.client.net;
 
+import com.google.gson.Gson;
+
+import xoxo.game.Game;
 import xoxo.net.request.NetRequest;
 import xoxo.net.request.Request;
+import xoxo.net.request.game.PlayRequest;
 import xoxo.net.request.user.LoginRequest;
 import xoxo.net.request.user.SignupRequest;
 import xoxo.net.response.NetResponse;
@@ -15,12 +19,23 @@ public class ServerAPI {
         this.net = net;
     }
 
+    private void log(Response response) {
+        System.out.println(response.body);
+    }
+
+    private void log() {
+        System.out.println(
+            net.getResponse()
+        );
+    }
+
     public void login(String username, String password) {
         net.request(new LoginRequest(username, password));
         final Response response = net.getResponse();
-        if (response.type== NetResponse.OK) {
+        if (response.type == NetResponse.OK) {
             this.username = username;
         }
+        log(response);
     }
 
     public void singup(String username, String password) {
@@ -28,6 +43,20 @@ public class ServerAPI {
     }
 
     public void findMatch() {
-        net.request(new Request(NetRequest.START_GAME, username));
+        net.request(new Request(NetRequest.FIND_MATCH, username));
+        log();
+    }
+
+    public void play(int x, int y) {
+        net.request(new PlayRequest(x + "," + y));
+        log();
+    }
+
+    public Response getResponse() {
+        return net.getResponse();
+    }
+
+    public Game getUpdate() {
+        return new Gson().fromJson(getResponse().body, Game.class);
     }
 }

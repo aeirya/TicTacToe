@@ -4,9 +4,9 @@ import xoxo.net.request.Request;
 import xoxo.net.response.Response;
 import xoxo.server.MatchFinder;
 
-public class PlayRequest extends Request {
+public class FindMatchRequest extends Request {
 
-    public PlayRequest(Request request) {
+    public FindMatchRequest(Request request) {
         super(request);
     }
 

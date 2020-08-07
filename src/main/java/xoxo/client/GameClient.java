@@ -12,7 +12,7 @@ import xoxo.net.request.user.SignupRequest;
 
 public class GameClient {
 
-    private final Network network;
+    protected final Network network;
     protected final ServerAPI server;
 
     public GameClient(String ip, int port) {
@@ -62,12 +62,17 @@ public class GameClient {
 
     public void test5() {
         network.request(new LoginRequest("arya", "1234"));
-        network.request(new Request(NetRequest.START_GAME));
+        network.request(new Request(NetRequest.FIND_MATCH));
         
     }
 
     public void test6() {
         // server.login("arya", "1234");
-        server.findMatch();
+        // server.login("ali", "a");
+        // server.findMatch();
+    }
+
+    public ServerAPI get() {
+        return server;
     }
 }

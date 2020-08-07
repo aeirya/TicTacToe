@@ -1,7 +1,8 @@
 package xoxo.server;
 
 import xoxo.net.request.Request;
-import xoxo.net.request.menu.PlayRequest;
+import xoxo.net.request.game.PlayRequest;
+import xoxo.net.request.menu.FindMatchRequest;
 import xoxo.net.request.user.DeleteRequest;
 import xoxo.net.request.user.IUserManager;
 import xoxo.net.request.user.LoginRequest;
@@ -9,6 +10,7 @@ import xoxo.net.request.user.LogoutRequest;
 import xoxo.net.request.user.SignupRequest;
 import xoxo.net.response.Response;
 import xoxo.server.net.INetwork;
+import xoxo.server.user.OnlineUser;
 import xoxo.server.user.UserManager;
 
 public class RequestHandler implements IRequestHandler {
@@ -37,8 +39,11 @@ public class RequestHandler implements IRequestHandler {
             return new DeleteRequest(request).apply(usermanager);
             case LOGOUT:
             return new LogoutRequest(request).apply(usermanager);
-            case START_GAME:
-            return new PlayRequest(request).apply(matcher);
+            case FIND_MATCH:
+            return new FindMatchRequest(request).apply(matcher);
+            case PLAY:
+            final OnlineUser user = getUser(request);
+            return new PlayRequest(request).apply(user);
             default:
             return null;
         }
@@ -46,5 +51,10 @@ public class RequestHandler implements IRequestHandler {
 
     public void respond(Response response, String auth) {
         net.respond(response.toString(), auth);
+    }
+
+    public OnlineUser getUser(Request request) { 
+        return usermanager
+            .findUserWithAuth(request.getAuth());
     }
 }

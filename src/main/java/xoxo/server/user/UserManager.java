@@ -87,12 +87,22 @@ public class UserManager implements IUserManager {
     }
     
     public OnlineUser getOnlineUser(String username) {
-        if(isOnline(username)) return onlineUsers.parallelStream().filter(u-> u.getUsername().equals(username)).collect(Collectors.toList()).get(0);
-        else return null;
+        return onlineUsers
+            .parallelStream()
+            .filter(u-> u.getUsername().equals(username))
+            .findAny()
+            .orElse(null);
     }
 
     public boolean isOnline(String username) {
         return getOnlineUsers().contains(username);
+    }
+
+    public OnlineUser findUserWithAuth(String auth) {
+        return onlineUsers.parallelStream()
+            .filter(u -> u.getAuth().equals(auth))
+            .findAny()
+            .orElse(null);            
     }
 
     public boolean logout(String username, String password) {

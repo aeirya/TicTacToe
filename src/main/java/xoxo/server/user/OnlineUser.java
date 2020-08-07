@@ -21,7 +21,7 @@ public class OnlineUser {
     }
 
     public String getAuth() {
-        return "";
+        return auth;
     } 
     
     public void setInQueue(boolean isInQueue) {
@@ -49,6 +49,10 @@ public class OnlineUser {
 
     public Game getMatch() {
         return match;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public void setAuth(String auth) {
