@@ -14,6 +14,7 @@ public class TriTest {
             e.printStackTrace();
         }
         new Thread(() -> new Client1().run()).start();
-        new Client2().run();
+        final Client2 client2 = new Client2();
+        client2.run();
     }
 }
