@@ -7,6 +7,11 @@ public class Request {
     public final NetRequest type;
     public final String body;
 
+    public Request(NetRequest type) {
+        this.type = type;
+        this.body = "";
+    }
+
     public Request(NetRequest type, String body) {
         this.type = type;
         this.body = body;

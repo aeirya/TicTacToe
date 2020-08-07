@@ -6,4 +6,8 @@ public enum NetRequest {
     DELETE,
     LOGOUT,
     
+    FIND_MATCH,
+    PLAY,
+    GET_UPDATE,
+    
 }

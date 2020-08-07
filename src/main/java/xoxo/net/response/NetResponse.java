@@ -1,5 +1,5 @@
 package xoxo.net.response;
 
 public enum NetResponse {
-    OK, ERROR
+    OK, ERROR, UPDATE
 }

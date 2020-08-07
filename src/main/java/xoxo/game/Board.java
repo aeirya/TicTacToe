@@ -41,13 +41,6 @@ public class Board {
 
     public void play(Player player, int x, int y) {
         player.sign(find(x,y));
-        if(checkWin(x, y, player)) {
-            win(player);
-        }
-    }
-
-    private void win(Player player) {
-        System.out.println("Player " + player.getSign().toString() + " won");
     }
 
     /**
@@ -88,7 +81,7 @@ public class Board {
         return subs;
     }
 
-    private boolean allMatch(List<Block> blocks, Sign sign) {
+    private synchronized boolean allMatch(List<Block> blocks, Sign sign) {
         return blocks.stream().parallel().allMatch(b -> b.matches(sign));
     }
 
