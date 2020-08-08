@@ -20,6 +20,7 @@ public class MainMenu extends Menu {
     MainMenu(IMenuLauncher lnchr, ServerAPI api) {
         super();
         this.api = api;
+        sleepTime = 3000;
         addCommand(new FindGameCommand(lnchr));
     }
 
@@ -37,5 +38,10 @@ public class MainMenu extends Menu {
             out.println(FlipTableConverters.fromIterable(rows, ScoreRow.class));
             out.flush();
         }
+    }
+
+    @Override
+    public boolean needsRefresh() {
+        return true;
     }
 }

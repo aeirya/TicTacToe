@@ -38,4 +38,8 @@ public class BoardState {
     public List<Block> getBlocks() {
         return blocks;
     }
+
+    public int getSize() {
+        return N;
+    }
 }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.ICommand;
+import xoxo.net.response.NetResponse;
 
 public class FindGameCommand extends Command {
 
@@ -23,7 +24,10 @@ public class FindGameCommand extends Command {
     @Override
     public void act(ServerAPI api) {
         api.findMatch();
-        launcher.launch(MenuType.GAME);
+        // waiting for starting match
+        if(api.getResponse().type == NetResponse.OK) {
+            launcher.launch(MenuType.GAME);
+        }
     }
     
 }

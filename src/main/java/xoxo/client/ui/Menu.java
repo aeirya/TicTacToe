@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 public abstract class Menu {
 
     private final Map<Integer, ICommand> map;
+    protected boolean isNeedsRefresh = true; 
+    protected int sleepTime = 1000;
 
     public Menu() {
         map = new HashMap<>();
@@ -37,5 +39,22 @@ public abstract class Menu {
 
     public void print(PrintWriter out) {
         //
+    }
+
+    public boolean needsRefresh() {
+        if (isNeedsRefresh) {
+            isNeedsRefresh = false;
+            return true;
+        }
+        return false;
+    }
+
+    public void sleep() {
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            e.printStackTrace();
+        }
     }
 }

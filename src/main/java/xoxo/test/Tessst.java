@@ -27,15 +27,19 @@ public class Tessst {
         final GameClient c2 = new GameClient(IP, PORT);
         c.run();
         c2.run();
-        // c2.get().login("ali", "a");
         c.get().login("arya", "1234");
         c.get().findMatch();
+        
+        // c2.get().login("ali", "a");
         // c2.get().findMatch();
         // read();
         // c.get().play(0, 1);
         // c2.get().play(2,2);
+        // System.out.println(c.get().getUpdate().toString());
+
         // read();
         new CliGraphics(c2.get());
+
         // System.out.println(c.get().getUpdate());
         // boolean isAlive = true;
         // while (isAlive) {

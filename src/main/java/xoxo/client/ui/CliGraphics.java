@@ -1,7 +1,10 @@
 package xoxo.client.ui;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.command.IMenuLauncher;
@@ -12,6 +15,8 @@ public class CliGraphics implements IMenuLauncher {
     private final Scanner in;
     private final PrintWriter out;
     private Menu menu;
+    private boolean isGettingInput = false;
+    int a = 0;
 
     public CliGraphics(ServerAPI net) {
         this.net = net;
@@ -24,41 +29,72 @@ public class CliGraphics implements IMenuLauncher {
     private void run() {
         new Thread(() -> {
             clear();
-            credits();
+            // credits();
+            updater();
             while (true) {
-                update();
+                getInput();
+                refresh();
             }
         }).start();
     }
 
     private void credits() {
-        out.println("XO - made by: aeirya");
-        printLine();
-        out.flush();
         out.println("write something to continue");
         out.flush();
         in.nextLine();
     }
 
+    private void updater() {
+        new Thread(
+            () -> {
+                while(true) {
+                    if ( !isGettingInput && menu.needsRefresh()) {
+                        refresh();
+                    }
+                    sleep();
+                }
+            }
+        ).start();
+    }
+
     private void update() {
         try {
             refresh();
-            final int cmd = in.nextInt();
-            in.nextLine();
-            if (menu.hasCommand(cmd)) {
-                menu.getCommand(cmd).takeArgs(in, out).act(net);
+            System.out.println("so refreshing!"  + a++);
+            if (in.hasNextLine()) {
+                System.out.println("getting the input");
+                getInput();
             } else {
-                clear();
+                sleep();
             }
-            out.flush();
         } catch (Exception e) {
-            clear();
+            // clear();
             in.reset();
             in.nextLine();
         }
     }
 
+    private void sleep() {
+        menu.sleep();
+    }
+
+    private void getInput() {
+        final int cmd = in.nextInt();
+        in.nextLine();
+        isGettingInput = true;
+        if (menu.hasCommand(cmd)) {
+            menu.getCommand(cmd).takeArgs(in, out).act(net);
+            out.flush();
+        } else {
+            clear();
+        }
+        isGettingInput = false;
+    }
+
     private void refresh() {
+        System.out.println("refreshinggggg " + a++);
+        in.reset();
+        clear();
         menu.print(out);
         help();
     }
@@ -95,7 +131,7 @@ public class CliGraphics implements IMenuLauncher {
             menu = new MainMenu(this, net);
             break;
             case GAME:
-            menu = new GameMenu();
+            menu = new GameMenu(net);
         }
         clear();
     }

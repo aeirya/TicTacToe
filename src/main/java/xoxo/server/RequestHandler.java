@@ -27,7 +27,7 @@ public class RequestHandler implements IRequestHandler {
         this.net = net;
         usermanager = new UserManager();
         scoreboard = new Scoreboard();
-        matcher = new MatchFinder(usermanager);
+        matcher = new MatchFinder(usermanager, net);
     }
 
     public void handle(Request request) {
