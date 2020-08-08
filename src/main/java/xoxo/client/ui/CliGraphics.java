@@ -74,8 +74,8 @@ public class CliGraphics implements IMenuLauncher {
     }
 
     private void refresh() {
-        in.reset();
-        clear();
+        // in.reset();
+        // clear();
         menu.print(out);
         help();
     }
@@ -102,6 +102,7 @@ public class CliGraphics implements IMenuLauncher {
 
     @Override
     public void launch(MenuType type) {
+        if (menu != null) menu.kill();
         switch(type) {
             case LOGIN:
             menu = new LoginMenu(this);

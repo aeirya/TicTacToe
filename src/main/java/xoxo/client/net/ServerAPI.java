@@ -9,6 +9,7 @@ import xoxo.net.request.menu.GetScoreboardRequest;
 import xoxo.net.request.menu.MatchFinishedRequest;
 import xoxo.net.request.menu.ScorebaordState;
 import xoxo.net.request.user.LoginRequest;
+import xoxo.net.request.user.LogoutRequest;
 import xoxo.net.request.user.SignupRequest;
 import xoxo.net.response.NetResponse;
 import xoxo.net.response.Response;
@@ -16,7 +17,8 @@ import xoxo.net.response.Response;
 public class ServerAPI {
     private final Network net;
     private String username;
-
+    private String password; // this could be removed
+    
     public ServerAPI(Network net) {
         this.net = net;
     }
@@ -40,8 +42,14 @@ public class ServerAPI {
         final Response response = net.getResponse();
         if (response.type == NetResponse.OK) {
             this.username = username;
+            this.password = password;
         }
         log(response);
+    }
+
+    public void logout() {
+        net.request(new LogoutRequest(username, password));
+        dump();
     }
 
     public void singup(String username, String password) {
