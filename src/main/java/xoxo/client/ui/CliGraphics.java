@@ -13,7 +13,6 @@ public class CliGraphics implements IMenuLauncher {
     private final PrintWriter out;
     private Menu menu;
     private boolean isGettingInput = false;
-    int a = 0;
 
     public CliGraphics(ServerAPI net) {
         this.net = net;
@@ -26,7 +25,7 @@ public class CliGraphics implements IMenuLauncher {
     private void run() {
         new Thread(() -> {
             clear();
-            // credits();
+            credits();
             updater();
             while (true) {
                 getInput();
@@ -36,7 +35,10 @@ public class CliGraphics implements IMenuLauncher {
     }
 
     private void credits() {
-        out.println("write something to continue");
+        printLine();
+        out.println("welcome to XOXO!");
+        printLine();
+        out.print("press enter to continue.. ");
         out.flush();
         in.nextLine();
     }
@@ -72,9 +74,8 @@ public class CliGraphics implements IMenuLauncher {
     }
 
     private void refresh() {
-        System.out.println("refreshinggggg " + a++);
-        // in.reset();
-        // clear();
+        in.reset();
+        clear();
         menu.print(out);
         help();
     }

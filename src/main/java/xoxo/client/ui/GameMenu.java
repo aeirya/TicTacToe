@@ -28,6 +28,7 @@ public class GameMenu extends Menu {
     protected void update() {
         final GameState update = api.getUpdate();
         if (update != null) {
+            if (update.equals(state)) return;
             state = update;
             isNeedsRefresh = true;
             if (update.winner != null) {

@@ -30,6 +30,20 @@ public class GameState {
     }
 
     public String getCurrentTurnPlayer() {
-        return player.hasTurn() ? player.getName() : opponent.getName();
+        return player.hasTurn() ? player.getSign().toString() : opponent.getSign().toString();
+    }
+
+    @Override
+    public boolean equals(Object state) {
+        if (! (state instanceof GameState)) return false;
+        final GameState g = ((GameState) state);
+        return g.player.getName().equals(player.getName())
+         && g.board.toString().equals(board.toString())
+         && ((g.winner == null && winner == null) || (g.winner != null && g.winner.equals(winner)));
+    }
+
+    @Override
+    public int hashCode() {
+        return player.getName().hashCode();
     }
 }

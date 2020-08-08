@@ -3,6 +3,8 @@ package xoxo.net.request.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import xoxo.game.Block;
 
 public class BoardState {
@@ -41,5 +43,10 @@ public class BoardState {
 
     public int getSize() {
         return N;
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }
