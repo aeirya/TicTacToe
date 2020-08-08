@@ -31,6 +31,7 @@ public class MatchFinder {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 e.printStackTrace();
             }
         }
@@ -41,7 +42,7 @@ public class MatchFinder {
         if (player == null) return false;
         System.out.println("queueing for " + username);
         inQueue.add(player);
-        player.setInMatch(true);
+        player.setInMatch(false);
         return true;
     }
 
@@ -50,8 +51,7 @@ public class MatchFinder {
         OnlineUser u2 = pick();
         Player p1 = toPlayer(u1);
         Player p2 = toPlayer(u2);
-        // Game game = new Game(p1, p2);
-        Game game = new Game(p2, p1);
+        Game game = new Game(p1, p2);
         u1.startMatch(game, p1);
         u2.startMatch(game, p2);
         game.setHomePlayer(Sign.X);

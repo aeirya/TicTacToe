@@ -12,4 +12,6 @@ public enum NetRequest {
     PLAY,
     GET_UPDATE,
     
+    MATCH_FINISH,
+
 }

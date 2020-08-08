@@ -42,6 +42,7 @@ public class UserManager implements IUserManager {
     } 
 
     private void createUser(User user) {
+        users.put(user.username, user);
         try {
             Files.write(new File(USERS_DIR + user.username).toPath(), new Gson().toJson(user).getBytes());
         } catch (IOException e) {

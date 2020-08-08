@@ -34,7 +34,7 @@ public class Game {
 
     public boolean play(Player player, int x, int y) {
         Logger.getGlobal().info(() -> player.getName() +  " playing " + x + " ," + y);
-        if(player.hasTurn() && board.hasEmpty(x, y)) {
+        if(player.hasTurn() && board.hasEmpty(x, y) && winner == null) {
             board.play(player, x, y);
             getOpponent(player).toggleHasTurn();
             if(board.checkWin(x, y, player)) {
@@ -77,5 +77,13 @@ public class Game {
 
     public GameState getState(Player player) {
         return new GameState(player, getOpponent(player), winner, board.getState());
+    }
+
+    public boolean hasWon(String player) {
+        return winner.equals(player);
+    }
+
+    public boolean isFinished() {
+        return winner != null;
     }
 }

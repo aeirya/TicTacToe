@@ -6,6 +6,7 @@ import xoxo.net.request.game.GameState;
 import xoxo.net.request.game.GetUpdateRequest;
 import xoxo.net.request.game.PlayRequest;
 import xoxo.net.request.menu.GetScoreboardRequest;
+import xoxo.net.request.menu.MatchFinishedRequest;
 import xoxo.net.request.menu.ScorebaordState;
 import xoxo.net.request.user.LoginRequest;
 import xoxo.net.request.user.SignupRequest;
@@ -30,6 +31,10 @@ public class ServerAPI {
         );
     }
 
+    private void dump() {
+        net.getResponse();
+    }
+
     public void login(String username, String password) {
         net.request(new LoginRequest(username, password));
         final Response response = net.getResponse();
@@ -41,11 +46,12 @@ public class ServerAPI {
 
     public void singup(String username, String password) {
         net.request(new SignupRequest(username, password));
+        dump();
     }
 
     public void findMatch() {
         net.request(new Request(NetRequest.FIND_MATCH, username));
-        log();
+        dump();
     }
 
     public void play(int x, int y) {
@@ -75,5 +81,10 @@ public class ServerAPI {
         net.request(new GetScoreboardRequest());
         final Response r = getResponse();
         return new ScorebaordState(r.body);
+    }
+
+    public void finishMatch() {
+        net.request(new MatchFinishedRequest());
+        dump();
     }
 }

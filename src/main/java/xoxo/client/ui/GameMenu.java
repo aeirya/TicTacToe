@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 import com.jakewharton.fliptables.FlipTableConverters;
 
 import xoxo.client.net.ServerAPI;
+import xoxo.client.ui.command.BackToMainMenuCommand;
+import xoxo.client.ui.command.IMenuLauncher;
 import xoxo.client.ui.command.PlayCommand;
 import xoxo.game.Block;
 import xoxo.game.Sign;
@@ -16,9 +18,10 @@ import xoxo.net.request.game.GameState;
 public class GameMenu extends Menu {
     private GameState state;
 
-    GameMenu(ServerAPI api) {
+    GameMenu(ServerAPI api, IMenuLauncher launcher) {
         super(api);
         addCommand(new PlayCommand());
+        addCommand(new BackToMainMenuCommand(launcher));
     }
 
     @Override
@@ -27,6 +30,10 @@ public class GameMenu extends Menu {
         if (update != null) {
             state = update;
             isNeedsRefresh = true;
+            if (update.winner != null) {
+                api.finishMatch();
+                isAlive = false;
+            }
         }
     }
 

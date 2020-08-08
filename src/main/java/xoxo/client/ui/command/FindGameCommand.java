@@ -24,8 +24,9 @@ public class FindGameCommand extends Command {
     @Override
     public void act(ServerAPI api) {
         api.findMatch();
-        // waiting for starting match
+        System.out.println("looking for game");
         if(api.getResponse().type == NetResponse.OK) {
+            System.out.println("game found");
             launcher.launch(MenuType.GAME);
         }
     }

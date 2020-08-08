@@ -4,7 +4,6 @@ import xoxo.game.Game;
 import xoxo.game.Player;
 import xoxo.net.request.NetRequest;
 import xoxo.net.request.Request;
-import xoxo.net.response.OkResponse;
 import xoxo.net.response.Response;
 import xoxo.server.user.OnlineUser;
 

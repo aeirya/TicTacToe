@@ -73,8 +73,8 @@ public class CliGraphics implements IMenuLauncher {
 
     private void refresh() {
         System.out.println("refreshinggggg " + a++);
-        in.reset();
-        clear();
+        // in.reset();
+        // clear();
         menu.print(out);
         help();
     }
@@ -107,11 +107,10 @@ public class CliGraphics implements IMenuLauncher {
             break;
             default:
             case MAIN:
-            System.out.println("switching to main");
             menu = new MainMenu(this, net);
             break;
             case GAME:
-            menu = new GameMenu(net);
+            menu = new GameMenu(net, this);
         }
         clear();
     }

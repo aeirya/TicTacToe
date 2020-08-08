@@ -15,6 +15,7 @@ public abstract class Menu {
     protected boolean isNeedsRefresh = true; 
     protected int sleepTime = 400;
     protected final ServerAPI api;
+    protected boolean isAlive = true;
 
     public Menu(ServerAPI api) {
         this.api = api;
@@ -24,7 +25,7 @@ public abstract class Menu {
 
     private void run() {
         new Thread(() -> {
-            while (true) {
+            while (isAlive) {
                 update();
                 try {
                     Thread.sleep(500);

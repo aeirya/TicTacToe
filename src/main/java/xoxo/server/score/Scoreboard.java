@@ -38,14 +38,20 @@ public class Scoreboard {
         return loader.loadDir(SCORE_DIR);
     }
 
+    private void createUser(String user) {
+        map.put(user, new Entry());
+        save(user);
+    }
+
     public void addRecord(String user, MatchResult result) {
         if (!map.containsKey(user))
-            map.put(user, new Entry());
+            createUser(user);
         map.get(user).add(result);
         save(user);
     }
 
     public Entry getUserEntry(String name) {
+        if (!map.containsKey(name)) createUser(name);
         return map.get(name);
     }
 
@@ -68,7 +74,7 @@ public class Scoreboard {
     }
 
     public static void main(String[] args) {
-        Scoreboard sc = new Scoreboard();
+    Scoreboard sc = new Scoreboard();
         sc.addRecord("arya", MatchResult.WIN);
         sc.addRecord("arya", MatchResult.WIN);
         sc.addRecord("arya", MatchResult.WIN);

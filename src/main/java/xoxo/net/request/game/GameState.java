@@ -32,5 +32,4 @@ public class GameState {
     public String getCurrentTurnPlayer() {
         return player.hasTurn() ? player.getName() : opponent.getName();
     }
-
 }
