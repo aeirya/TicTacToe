@@ -20,6 +20,15 @@ public class Block {
     }
 
     public boolean matches(Sign sign) {
+        if (this.sign == null) return false;
         return this.sign.equals(sign);
+    }
+
+    public boolean isFilled() {
+        return (sign != null);
+    }
+
+    public Sign getSign() {
+        return sign;
     }
 }

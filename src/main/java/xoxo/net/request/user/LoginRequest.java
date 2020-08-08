@@ -25,7 +25,8 @@ public class LoginRequest extends UserRequest {
         final String password = user.password;
         final boolean result = manager.login(username, password);
         if (result) {
-            return new Response(NetResponse.OK, "hi "+ username);
+            manager.getOnlineUser(username).setAuth(getAuth());
+            return new Response(NetResponse.OK, "hi " + username);
         } else {
             return new Response(NetResponse.ERROR, "can't sign you in");
         }

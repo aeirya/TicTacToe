@@ -31,7 +31,7 @@ public class Network {
         }
     }
 
-    public void request(Request request) {
+    public synchronized void request(Request request) {
         server.send(
             parse(request.sign(auth))
         );
@@ -41,7 +41,7 @@ public class Network {
         request(new Request(type, body));
     }
 
-    public Response getResponse() {
+    public synchronized Response getResponse() {
         return server.getNext();
     }
 

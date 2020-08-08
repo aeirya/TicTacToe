@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import xoxo.net.request.game.BoardState;
+
 
 public class Board {
     
-    private static final int N = 7;
-    private static final int WINNING_LIMIT = 4;
+    private final int N = 7;
+    private final int WINNING_LIMIT = 4;
 
     private final List<Block> blocks;
 
@@ -39,15 +41,12 @@ public class Board {
         return blocks.get(N * x + y);
     }
 
-    public void play(Player player, int x, int y) {
-        player.sign(find(x,y));
-        if(checkWin(x, y, player)) {
-            win(player);
-        }
+    public boolean hasEmpty(int x, int y) {
+        return ! find(x, y).isFilled();
     }
 
-    private void win(Player player) {
-        System.out.println("Player " + player.getSign().toString() + " won");
+    public void play(Player player, int x, int y) {
+        player.sign(find(x,y));
     }
 
     /**
@@ -88,11 +87,19 @@ public class Board {
         return subs;
     }
 
-    private boolean allMatch(List<Block> blocks, Sign sign) {
+    private synchronized boolean allMatch(List<Block> blocks, Sign sign) {
         return blocks.stream().parallel().allMatch(b -> b.matches(sign));
     }
 
     private boolean checkLine(List<Block> line, Sign sign) {
         return subs(line).stream().anyMatch(sub -> allMatch(sub, sign));
+    }
+
+    private List<Block> getFilledBlocks() {
+        return blocks.stream().filter(Block::isFilled).collect(Collectors.toList());
+    }
+
+    public BoardState getState() {
+        return new BoardState(getFilledBlocks(), N);
     }
 }
