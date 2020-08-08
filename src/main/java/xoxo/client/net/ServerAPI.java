@@ -53,7 +53,7 @@ public class ServerAPI {
         log();
     }
 
-    public Response getResponse() {
+    public synchronized Response getResponse() {
         return net.getResponse();
     }
 

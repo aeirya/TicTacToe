@@ -41,6 +41,10 @@ public class Board {
         return blocks.get(N * x + y);
     }
 
+    public boolean hasEmpty(int x, int y) {
+        return ! find(x, y).isFilled();
+    }
+
     public void play(Player player, int x, int y) {
         player.sign(find(x,y));
     }

@@ -5,6 +5,8 @@ import java.io.IOException;
 import xoxo.client.GameClient;
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.CliGraphics;
+import xoxo.client.ui.GameMenu;
+import xoxo.net.request.game.GameState;
 import xoxo.server.ServerMain;
 
 public class Tessst {
@@ -40,6 +42,8 @@ public class Tessst {
 
         // read();
         
+
+
         new Thread(() -> {
             try {
                 Thread.sleep(7000);
@@ -60,9 +64,21 @@ public class Tessst {
             api.play(1,6);
         }
         ).start();
+        
+
+
         new CliGraphics(c2.get());
 
+
+
         // System.out.println(c.get().getUpdate());
+
+
+
+
+        // c2.get().login("ali", "a");
+        // c2.get().findMatch();
+
         // boolean isAlive = true;
         // while (isAlive) {
         //     int a = read();
@@ -79,11 +95,10 @@ public class Tessst {
         //         c2.get().play(read(), read());
         //         break;
         //         case 2:
-        //         GameState game = c.get().getUpdate();
-        //         if (game == null) System.err.println("no update");
-        //         else {
-        //             System.out.println(game.toString());
-        //         }
+        //         final GameState state = c.get().getUpdate();
+        //         if (state == null) break;
+        //         final String table = new GameMenu.TableCreator().makeTable(state.board);
+        //         System.out.println(table);
         //         break;
         //         default:
         //         continue;

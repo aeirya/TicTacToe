@@ -29,5 +29,8 @@ public class GameState {
         return new Gson().toJson(this);
     }
 
+    public String getCurrentTurnPlayer() {
+        return player.hasTurn() ? player.getName() : opponent.getName();
+    }
 
 }

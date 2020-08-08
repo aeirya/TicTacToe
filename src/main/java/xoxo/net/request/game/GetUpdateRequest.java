@@ -19,7 +19,7 @@ public class GetUpdateRequest extends Request {
     
     public Response apply(OnlineUser user) {
         final Game game = user.getMatch();
-        if (game.isToBeUpdated()) {
+        if (game != null /* && game.isToBeUpdated() */) {
             GameState state = game.getState(user.getPlayer());
             return new Response(NetResponse.OK, state.toString());
         } else {

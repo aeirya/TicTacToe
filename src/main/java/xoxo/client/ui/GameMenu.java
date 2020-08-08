@@ -38,34 +38,47 @@ public class GameMenu extends Menu {
         out.flush();
     }
 
+    private String table(BoardState state) {
+        return new TableCreator().makeTable(state);
+    }
+
     private void printStatus(PrintWriter out) {
-        out.println(state.player.getName());
+        out.println("player: " + state.player.getName());
         out.println("playing as: " + state.player.getSign().toString());
+        out.println("against: " + state.opponent.getName());
+        if (state.winner != null) out.println(state.winner + " won!"); 
+        else out.println("current turn: " + state.getCurrentTurnPlayer());
         out.println();
     }
 
-    private String table(BoardState board) {
-        final Iterator<Block> blocks = board.getBlocks().iterator();
-        final int N = board.getSize();
-        return FlipTableConverters.fromObjects(tableHead(N), tableBody(N, blocks));
-    }
-
-    private String[] tableHead(int n) {
-        return IntStream.range(0, n).mapToObj(String::valueOf).toArray(String[]::new);
-    }
-
-    private String[][] tableBody(int n, Iterator<Block> blocks) {
-        final String[][] table = new String[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                table[i][j] = signToStr(blocks.next().getSign());
-            }
+    public static class TableCreator {
+        public String makeTable(BoardState board) {
+            return table(board);
         }
-        return table;
-    }
 
-    private String signToStr(Sign sgn) {
-        if (sgn == null) return "";
-        else return sgn.toString();
-    }
+        private String table(BoardState board) {
+            final Iterator<Block> blocks = board.getBlocks().iterator();
+            final int N = board.getSize();
+            return FlipTableConverters.fromObjects(tableHead(N), tableBody(N, blocks));
+        }
+    
+        private String[] tableHead(int n) {
+            return IntStream.range(0, n).mapToObj(String::valueOf).toArray(String[]::new);
+        }
+    
+        private String[][] tableBody(int n, Iterator<Block> blocks) {
+            final String[][] table = new String[n][n];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    table[i][j] = signToStr(blocks.next().getSign());
+                }
+            }
+            return table;
+        }
+    
+        private String signToStr(Sign sgn) {
+            if (sgn == null) return "";
+            else return sgn.toString();
+        }
+    } 
 }

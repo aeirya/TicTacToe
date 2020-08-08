@@ -32,21 +32,24 @@ public class Game {
         away.setSign(sign.flip());
     }
 
-    public void play(Player player, int x, int y) {
+    public boolean play(Player player, int x, int y) {
         Logger.getGlobal().info(() -> player.getName() +  " playing " + x + " ," + y);
-        if(player.hasTurn()) {
+        if(player.hasTurn() && board.hasEmpty(x, y)) {
             board.play(player, x, y);
             getOpponent(player).toggleHasTurn();
             if(board.checkWin(x, y, player)) {
                 win(player);
             }
             isUpdated = false;
+            return true;
         }
+        else return false;
     }
 
     private void win(Player player) {
         Logger.getGlobal().info(
             () -> "Player " + player.getSign().toString() + " won");
+            winner = player.getName();
     }
 
     public boolean isToBeUpdated() {

@@ -30,7 +30,7 @@ public class RequestHandler implements IRequestHandler {
         matcher = new MatchFinder(usermanager, net);
     }
 
-    public void handle(Request request) {
+    public synchronized void handle(Request request) {
         respond(apply(request), request.getAuth());
     }
 
@@ -59,7 +59,7 @@ public class RequestHandler implements IRequestHandler {
         }
     }
 
-    public void respond(Response response, String auth) {
+    public synchronized void respond(Response response, String auth) {
         net.respond(response.toString(), auth);
     }
 

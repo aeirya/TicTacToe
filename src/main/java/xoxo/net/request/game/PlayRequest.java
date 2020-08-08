@@ -27,8 +27,7 @@ public class PlayRequest extends Request {
         final String[] split = body.split(",");
         final int x = Integer.parseInt(split[0]);
         final int y = Integer.parseInt(split[1]);
-        game.play(player, x, y); 
-        // return new Response(NetResponse.UPDATE, game.toString());
-        return new OkResponse();
+        final boolean result = game.play(player, x, y); 
+        return new Response(result);
     } 
 }

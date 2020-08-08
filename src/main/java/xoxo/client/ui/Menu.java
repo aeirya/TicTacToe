@@ -13,7 +13,7 @@ public abstract class Menu {
 
     private final Map<Integer, ICommand> map;
     protected boolean isNeedsRefresh = true; 
-    protected int sleepTime = 1000;
+    protected int sleepTime = 400;
     protected final ServerAPI api;
 
     public Menu(ServerAPI api) {

@@ -25,7 +25,8 @@ public class MainMenu extends Menu {
     @Override
     protected void update() {
         ScorebaordState update = api.getScoreboard();
-        if(scoreboard != null && scoreboard.toString().equals(update.toString())) return;
+        if(scoreboard != null && 
+        scoreboard.toString().equals(update.toString())) return;
         this.scoreboard = update;
         isNeedsRefresh = true;
     }
