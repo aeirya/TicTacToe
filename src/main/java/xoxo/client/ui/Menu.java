@@ -7,14 +7,37 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import xoxo.client.net.ServerAPI;
+
 public abstract class Menu {
 
     private final Map<Integer, ICommand> map;
     protected boolean isNeedsRefresh = true; 
     protected int sleepTime = 1000;
+    protected final ServerAPI api;
 
-    public Menu() {
+    public Menu(ServerAPI api) {
+        this.api = api;
         map = new HashMap<>();
+        run();
+    }
+
+    private void run() {
+        new Thread(() -> {
+            while (true) {
+                update();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    protected void update() {
+        // override this
     }
 
     protected void addCommand(ICommand command) {

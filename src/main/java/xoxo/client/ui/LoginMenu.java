@@ -7,7 +7,7 @@ import xoxo.client.ui.command.SignupCommand;
 public class LoginMenu extends Menu {
 
     public LoginMenu(IMenuLauncher launcher) {
-        super();
+        super(null);
         addCommand(new LoginCommand(launcher));
         addCommand(new SignupCommand());
     }

@@ -15,18 +15,24 @@ import xoxo.net.request.menu.ScorebaordState;
 
 public class MainMenu extends Menu {
 
-    private final ServerAPI api;
+    private ScorebaordState scoreboard;
 
     MainMenu(IMenuLauncher lnchr, ServerAPI api) {
-        super();
-        this.api = api;
-        sleepTime = 3000;
+        super(api);
         addCommand(new FindGameCommand(lnchr));
+    }
+    
+    @Override
+    protected void update() {
+        ScorebaordState update = api.getScoreboard();
+        if(scoreboard != null && scoreboard.toString().equals(update.toString())) return;
+        this.scoreboard = update;
+        isNeedsRefresh = true;
     }
 
     @Override
     public void print(PrintWriter out) {
-        ScorebaordState scoreboard = api.getScoreboard();
+        if (scoreboard == null) return;
         new ScoreboardPrinter(scoreboard, out);
     }
 
@@ -38,10 +44,5 @@ public class MainMenu extends Menu {
             out.println(FlipTableConverters.fromIterable(rows, ScoreRow.class));
             out.flush();
         }
-    }
-
-    @Override
-    public boolean needsRefresh() {
-        return true;
     }
 }

@@ -14,34 +14,19 @@ import xoxo.net.request.game.BoardState;
 import xoxo.net.request.game.GameState;
 
 public class GameMenu extends Menu {
-    private final ServerAPI api;
     private GameState state;
 
     GameMenu(ServerAPI api) {
-        super();
-        this.api = api;
+        super(api);
         addCommand(new PlayCommand());
-        run();
     }
 
-    private void run() {
-        new Thread(() -> {
-            while (true) {
-                update();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    private void update() {
+    @Override
+    protected void update() {
         final GameState update = api.getUpdate();
         if (update != null) {
             state = update;
+            isNeedsRefresh = true;
         }
     }
 
@@ -82,10 +67,5 @@ public class GameMenu extends Menu {
     private String signToStr(Sign sgn) {
         if (sgn == null) return "";
         else return sgn.toString();
-    }
-
-    @Override
-    public boolean needsRefresh() {
-        return !state.player.hasTurn() || super.needsRefresh();
     }
 }

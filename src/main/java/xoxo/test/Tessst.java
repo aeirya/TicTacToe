@@ -3,13 +3,13 @@ package xoxo.test;
 import java.io.IOException;
 
 import xoxo.client.GameClient;
+import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.CliGraphics;
 import xoxo.server.ServerMain;
 
 public class Tessst {
     private static final String IP = "localhost";
     private static final int PORT = 8000;
-
 
     public static int read() {
         try {
@@ -21,6 +21,7 @@ public class Tessst {
             return 0;
         }
     }
+
     public static void main(String[] args) {
         ServerMain.main(args);
         final GameClient c = new GameClient(IP, PORT);
@@ -29,7 +30,7 @@ public class Tessst {
         c2.run();
         c.get().login("arya", "1234");
         c.get().findMatch();
-        
+
         // c2.get().login("ali", "a");
         // c2.get().findMatch();
         // read();
@@ -38,6 +39,27 @@ public class Tessst {
         // System.out.println(c.get().getUpdate().toString());
 
         // read();
+        
+        new Thread(() -> {
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println("arrrrrr");
+            ServerAPI api = c.get();
+            api.play(1, 5);
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println("arrrrrr");
+            api.play(1,6);
+        }
+        ).start();
         new CliGraphics(c2.get());
 
         // System.out.println(c.get().getUpdate());

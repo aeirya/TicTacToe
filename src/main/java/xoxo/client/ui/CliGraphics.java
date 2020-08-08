@@ -1,10 +1,7 @@
 package xoxo.client.ui;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.command.IMenuLauncher;
@@ -55,23 +52,6 @@ public class CliGraphics implements IMenuLauncher {
                 }
             }
         ).start();
-    }
-
-    private void update() {
-        try {
-            refresh();
-            System.out.println("so refreshing!"  + a++);
-            if (in.hasNextLine()) {
-                System.out.println("getting the input");
-                getInput();
-            } else {
-                sleep();
-            }
-        } catch (Exception e) {
-            // clear();
-            in.reset();
-            in.nextLine();
-        }
     }
 
     private void sleep() {
