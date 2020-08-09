@@ -6,12 +6,10 @@ import xoxo.net.connection.IDataReceiver;
 import xoxo.net.connection.NetworkConnection;
 
 public class Server implements IDataReceiver {
-    private final Socket socket;
     private final NetworkConnection connection;
     private final INetworkService netService;
 
     public Server(INetworkService networkService, Socket socket) {
-        this.socket = socket;
         this.netService = networkService;
         this.connection = new NetworkConnection(this, socket);
         this.connection.start();
