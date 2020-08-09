@@ -13,5 +13,5 @@ public enum NetRequest {
     GET_UPDATE,
     
     MATCH_FINISH,
-
+    REPLAY,
 }
