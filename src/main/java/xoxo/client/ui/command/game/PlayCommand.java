@@ -1,10 +1,11 @@
-package xoxo.client.ui.command;
+package xoxo.client.ui.command.game;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.ICommand;
+import xoxo.client.ui.command.Command;
 
 public class PlayCommand extends Command {
 

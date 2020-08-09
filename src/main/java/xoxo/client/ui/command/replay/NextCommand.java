@@ -1,7 +1,7 @@
 package xoxo.client.ui.command.replay;
 
 import xoxo.client.net.ServerAPI;
-import xoxo.client.ui.ReplayMenu;
+import xoxo.client.ui.menu.ReplayMenu;
 
 public class NextCommand extends ReplayCommand {
 

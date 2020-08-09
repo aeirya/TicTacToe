@@ -5,7 +5,7 @@ import java.io.IOException;
 import xoxo.client.GameClient;
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.CliGraphics;
-import xoxo.client.ui.GameMenu;
+import xoxo.client.ui.menu.GameMenu;
 import xoxo.net.request.game.GameState;
 import xoxo.server.ServerMain;
 

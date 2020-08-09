@@ -1,10 +1,13 @@
-package xoxo.client.ui.command;
+package xoxo.client.ui.command.mainmenu;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.ICommand;
+import xoxo.client.ui.command.Command;
+import xoxo.client.ui.command.IMenuLauncher;
+import xoxo.client.ui.command.MenuType;
 import xoxo.net.response.NetResponse;
 
 public class FindGameCommand extends Command {

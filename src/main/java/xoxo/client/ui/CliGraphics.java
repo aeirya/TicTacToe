@@ -6,6 +6,11 @@ import java.util.Scanner;
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.command.IMenuLauncher;
 import xoxo.client.ui.command.MenuType;
+import xoxo.client.ui.menu.GameMenu;
+import xoxo.client.ui.menu.LoginMenu;
+import xoxo.client.ui.menu.MainMenu;
+import xoxo.client.ui.menu.Menu;
+import xoxo.client.ui.menu.ReplayMenu;
 
 public class CliGraphics implements IMenuLauncher {
     private final ServerAPI net;

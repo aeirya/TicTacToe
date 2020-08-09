@@ -1,8 +1,8 @@
-package xoxo.client.ui;
+package xoxo.client.ui.menu;
 
 import xoxo.client.ui.command.IMenuLauncher;
-import xoxo.client.ui.command.LoginCommand;
-import xoxo.client.ui.command.SignupCommand;
+import xoxo.client.ui.command.user.LoginCommand;
+import xoxo.client.ui.command.user.SignupCommand;
 
 public class LoginMenu extends Menu {
 
