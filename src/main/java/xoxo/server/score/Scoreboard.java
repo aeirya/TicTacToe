@@ -39,7 +39,7 @@ public class Scoreboard {
     }
 
     private void createUser(String user) {
-        map.put(user, new Entry());
+        map.put(user, new Entry(user));
         save(user);
     }
 
@@ -69,7 +69,7 @@ public class Scoreboard {
 
     public ScorebaordState getState(OnlineUser user, IUserManager usermanager) {
         return new ScorebaordState(
-            getScoreList(), usermanager.getOnlineStatus(), getUserEntry(user.getUsername())
+            getScoreList(), usermanager.getOnlineStatus(), getUserEntry(user.getUsername()), usermanager.getUsersLobbyStatus()
         );
     }
 

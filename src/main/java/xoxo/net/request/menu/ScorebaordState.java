@@ -13,9 +13,15 @@ public class ScorebaordState {
     private List<ScoreRow> scores;
     private Entry me;
 
-    public ScorebaordState(Map<String, Integer> scores, Map<String, Boolean> onlineStatus, Entry me) {
-        this.scores = makeScoreboard(scores, onlineStatus);
+    public ScorebaordState(Map<String, Integer> scores, Map<String, Boolean> onlineStatus, Entry me, Map<String, String> status) {
+        this.scores = makeScoreboard(scores, onlineStatus, status);
         this.me = me;
+        hightlightMe();
+    }
+
+    private void hightlightMe() {
+        final ScoreRow myRow = scores.stream().filter(s-> s.getUser().equals(me.getUser())).findAny().orElse(null);
+        if(myRow != null) myRow.highlight();
     }
 
     public ScorebaordState(String json) {
@@ -28,20 +34,16 @@ public class ScorebaordState {
         return new Gson().toJson(this);
     }
 
-    private List<ScoreRow> makeScoreboard(Map<String, Integer> scores, Map<String, Boolean> onlineStatus) {
+    private List<ScoreRow> makeScoreboard(Map<String, Integer> scores, Map<String, Boolean> onlineStatus, Map<String, String> status) {
         return scores
             .keySet()
             .stream()
-            .map(user -> new ScoreRow(user, scores.get(user), onlineStatus.getOrDefault(user, false)))
+            .map(user -> new ScoreRow(user, scores.get(user), onlineStatus.getOrDefault(user, false), status.getOrDefault(user, "offline")))
             .collect(Collectors.toList());
     }
 
     public List<ScoreRow> getOnline() {
         return filterByOnline(true);
-    }
-
-    public Entry getMe() {
-        return me;
     }
 
     public List<ScoreRow> getOffline() {
@@ -54,5 +56,9 @@ public class ScorebaordState {
             .filter(user -> user.isOnline() == online)
             .sorted((a,b) -> b.getScore() - a.getScore())
             .collect(Collectors.toList());
+    }
+
+    public Entry getMe() {
+        return me;
     }
 }

@@ -13,4 +13,5 @@ public interface IUserManager {
     OnlineUser getOnlineUser(String username);
     OnlineUser findUserWithAuth(String auth);
     Map<String, Boolean> getOnlineStatus();
+    Map<String, String> getUsersLobbyStatus();
 }

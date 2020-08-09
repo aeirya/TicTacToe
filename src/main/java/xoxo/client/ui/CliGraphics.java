@@ -65,8 +65,8 @@ public class CliGraphics implements IMenuLauncher {
         in.nextLine();
         isGettingInput = true;
         if (menu.hasCommand(cmd)) {
+            refresh();
             menu.getCommand(cmd).takeArgs(in, out).act(net);
-            out.flush();
         } else {
             clear();
         }
@@ -74,8 +74,8 @@ public class CliGraphics implements IMenuLauncher {
     }
 
     private void refresh() {
-        // in.reset();
-        // clear();
+        in.reset();
+        clear();
         menu.print(out);
         help();
     }
