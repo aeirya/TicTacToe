@@ -113,6 +113,10 @@ public class CliGraphics implements IMenuLauncher {
             break;
             case GAME:
             menu = new GameMenu(net, this);
+            break;
+            case REPLAY:
+            menu = new ReplayMenu(net, this);
+            break;
         }
         clear();
     }

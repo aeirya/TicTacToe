@@ -28,6 +28,10 @@ public class Save {
         return board;
     }
 
+    public int getSize() {
+        return moves.size();
+    }
+
     private class Move {
         private final Player player;
         private final int x;
