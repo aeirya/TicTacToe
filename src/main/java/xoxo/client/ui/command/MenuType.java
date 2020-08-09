@@ -2,5 +2,5 @@
 package xoxo.client.ui.command;
 
 public enum MenuType {
-    LOGIN, MAIN, GAME
+    LOGIN, MAIN, GAME, REPLAY
 }

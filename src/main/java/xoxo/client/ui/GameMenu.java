@@ -10,6 +10,7 @@ import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.command.BackToMainMenuCommand;
 import xoxo.client.ui.command.IMenuLauncher;
 import xoxo.client.ui.command.PlayCommand;
+import xoxo.client.ui.command.ReplayCommand;
 import xoxo.game.Block;
 import xoxo.game.Player;
 import xoxo.game.Sign;
@@ -18,11 +19,13 @@ import xoxo.net.request.game.GameState;
 
 public class GameMenu extends Menu {
     private GameState state;
+    private final IMenuLauncher launcher;
 
     GameMenu(ServerAPI api, IMenuLauncher launcher) {
         super(api);
         addCommand(new PlayCommand());
         addCommand(new BackToMainMenuCommand(launcher));
+        this.launcher = launcher;
     }
 
     @Override
@@ -33,10 +36,15 @@ public class GameMenu extends Menu {
             state = update;
             isNeedsRefresh = true;
             if (update.winner != null) {
-                api.finishMatch();
-                isAlive = false;
+                endGame();
             }
         }
+    }
+
+    private void endGame() {
+        api.finishMatch();
+        isAlive = false;
+        addCommand(new ReplayCommand(launcher));
     }
 
     @Override

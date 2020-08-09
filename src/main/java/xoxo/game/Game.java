@@ -10,20 +10,16 @@ public class Game {
     private final Board board;
     private final Player home;
     private final Player away;
+    private final Save save;
     
     private String winner = null;
     private boolean isUpdated = false;
-
-    public Game() {
-        home = null;
-        away = null;
-        board = new Board();
-    }
 
     public Game(Player p1, Player p2) {
         home = p1;
         away = p2;
         board = new Board();
+        save = new Save();
     }
 
     public void setHomePlayer(Sign sign) {
@@ -36,6 +32,7 @@ public class Game {
         Logger.getGlobal().info(() -> player.getName() +  " playing " + x + " ," + y);
         if(player.hasTurn() && board.hasEmpty(x, y) && winner == null) {
             board.play(player, x, y);
+            save.play(player, x, y);
             getOpponent(player).toggleHasTurn();
             if(board.checkWin(x, y, player)) {
                 win(player);
@@ -85,5 +82,9 @@ public class Game {
 
     public boolean isFinished() {
         return winner != null;
+    }
+
+    public Save getSave() {
+        return save;
     }
 }

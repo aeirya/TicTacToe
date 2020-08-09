@@ -1,8 +1,10 @@
 package xoxo.client.net;
 
+import xoxo.game.Save;
 import xoxo.net.request.NetRequest;
 import xoxo.net.request.Request;
 import xoxo.net.request.game.GameState;
+import xoxo.net.request.game.GetSaveRequest;
 import xoxo.net.request.game.GetUpdateRequest;
 import xoxo.net.request.game.PlayRequest;
 import xoxo.net.request.menu.GetScoreboardRequest;
@@ -94,5 +96,13 @@ public class ServerAPI {
     public void finishMatch() {
         net.request(new MatchFinishedRequest());
         dump();
+    }
+
+    public Save getReplay() {
+        net.request(new GetSaveRequest());
+        final Response r = getResponse();
+        if(r.body != null) {
+            return new Save(r.body);
+        } else return null;
     }
 }

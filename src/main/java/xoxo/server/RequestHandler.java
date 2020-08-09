@@ -1,6 +1,7 @@
 package xoxo.server;
 
 import xoxo.net.request.Request;
+import xoxo.net.request.game.GetSaveRequest;
 import xoxo.net.request.game.GetUpdateRequest;
 import xoxo.net.request.game.PlayRequest;
 import xoxo.net.request.menu.FindMatchRequest;
@@ -57,6 +58,8 @@ public class RequestHandler implements IRequestHandler {
             return new GetUpdateRequest(request).apply(getUser(request));
             case MATCH_FINISH:
             return new MatchFinishedRequest().apply(getUser(request), scoreboard);
+            case REPLAY:
+            return new GetSaveRequest().apply(getUser(request));
             default:
             return null;
         }
