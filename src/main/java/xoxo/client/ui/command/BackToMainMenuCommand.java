@@ -18,6 +18,7 @@ public class BackToMainMenuCommand extends Command {
     @Override
     public void act(ServerAPI api) {
         lnchr.launch(MenuType.MAIN);
+        api.finishMatch();
     }
 
     @Override

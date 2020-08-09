@@ -56,7 +56,8 @@ public class Board {
         final Sign sign = player.getSign();
         if(checkLine(getVLine(y), sign)) return true;
         if(checkLine(getHLine(x), sign)) return true;
-        return (checkLine(getDLine(x, y), sign));
+        if (checkLine(getDLine(x, y), sign)) return true;
+        return checkLine(getDLine(y, x), sign);
     }
 
     private List<Block> getVLine(int y) {
