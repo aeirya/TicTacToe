@@ -65,8 +65,8 @@ public class CliGraphics implements IMenuLauncher {
         in.nextLine();
         isGettingInput = true;
         if (menu.hasCommand(cmd)) {
+            refresh();
             menu.getCommand(cmd).takeArgs(in, out).act(net);
-            out.flush();
         } else {
             clear();
         }
@@ -102,6 +102,7 @@ public class CliGraphics implements IMenuLauncher {
 
     @Override
     public void launch(MenuType type) {
+        if (menu != null) menu.kill();
         switch(type) {
             case LOGIN:
             menu = new LoginMenu(this);

@@ -8,6 +8,10 @@ import xoxo.net.response.Response;
 
 public abstract class UserRequest extends Request {
 
+    protected UserRequest(NetRequest type, String username, String password) {
+        super(type, new User(username, password));
+    }
+
     public UserRequest(NetRequest type, User user) {
         super(type, user);
     }

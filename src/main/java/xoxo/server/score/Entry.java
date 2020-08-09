@@ -1,16 +1,18 @@
 package xoxo.server.score;
 
 public class Entry {
+    private final String user;
     private int wins;
     private int lost;
 
-    Entry () {
+    Entry (String user) {
+        this.user = user;
         wins = 0;
         lost = 0;
     }
 
     public int getScore() {
-        return wins > lost ? wins - lost : 0;
+        return wins - lost;
     }
 
     public void win() {
@@ -23,5 +25,17 @@ public class Entry {
 
     public void add(MatchResult result) {
         result.apply(this);
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosts() {
+        return lost;
+    }
+
+    public String getUser() {
+        return user;
     }
 }

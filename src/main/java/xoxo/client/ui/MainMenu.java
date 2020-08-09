@@ -10,8 +10,10 @@ import com.jakewharton.fliptables.FlipTableConverters;
 import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.command.FindGameCommand;
 import xoxo.client.ui.command.IMenuLauncher;
+import xoxo.client.ui.command.LogoutCommand;
 import xoxo.net.request.menu.ScoreRow;
 import xoxo.net.request.menu.ScorebaordState;
+import xoxo.server.score.Entry;
 
 public class MainMenu extends Menu {
 
@@ -20,6 +22,7 @@ public class MainMenu extends Menu {
     MainMenu(IMenuLauncher lnchr, ServerAPI api) {
         super(api);
         addCommand(new FindGameCommand(lnchr));
+        addCommand(new LogoutCommand(lnchr));
     }
     
     @Override
@@ -39,11 +42,22 @@ public class MainMenu extends Menu {
 
     private class ScoreboardPrinter {
         ScoreboardPrinter(ScorebaordState state, PrintWriter out) {
+            out.println(getMyStatusTable(state));
+            out.println();
             final List<ScoreRow> rows = new ArrayList<>();
             rows.addAll(state.getOnline());
             rows.addAll(state.getOffline());
             out.println(FlipTableConverters.fromIterable(rows, ScoreRow.class));
             out.flush();
         }
+
+        String getMyStatusTable(ScorebaordState state) {
+            String[] header = {"user", "wins", "lost" };
+            final Entry me = state.getMe();
+            String[][] data = { { me.getUser(), String.valueOf(me.getWins()), String.valueOf(me.getLosts()) } };
+            return FlipTableConverters.fromObjects(header, data);
+        }
+
+        
     }
 }

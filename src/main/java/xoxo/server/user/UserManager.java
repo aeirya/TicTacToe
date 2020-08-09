@@ -117,4 +117,21 @@ public class UserManager implements IUserManager {
     public Map<String, Boolean> getOnlineStatus() {
         return users.keySet().stream().collect(Collectors.toMap(Function.identity(), this::isOnline));
     }
+
+    public Map<String, String> getUsersLobbyStatus() {
+        return users.keySet().stream().collect(Collectors.toMap(Function.identity(), this::getStatus));
+    }
+
+    private String getStatus(String user) {
+        if(isOnline(user)) {
+            if(getOnlineUser(user).isInMatch()) {
+                return "in match";
+            }
+            else {
+                return "in lobby";
+            }
+        } else {
+            return "offline";
+        }
+    }
 }

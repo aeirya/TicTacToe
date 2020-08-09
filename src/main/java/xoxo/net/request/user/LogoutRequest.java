@@ -8,7 +8,7 @@ import xoxo.net.response.Response;
 public class LogoutRequest extends UserRequest {
     
     public LogoutRequest(String username, String password) {
-        super(NetRequest.LOGOUT, new User(username, password));
+        super(NetRequest.LOGOUT, username, password);
     }
 
     public LogoutRequest(Request request) {

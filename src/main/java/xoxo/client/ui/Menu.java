@@ -37,6 +37,10 @@ public abstract class Menu {
         }).start();
     }
 
+    public void kill() {
+        isAlive = false;
+    }
+
     protected void update() {
         // override this
     }
