@@ -14,9 +14,9 @@ public class Network implements INetwork {
     private final NetworkListener listener;
     private final IRequestHandler handler;
 
-    public Network(int port, IRequestHandler handler) {
+    public Network(String ip, int port, IRequestHandler handler) {
         clients = new ClientManager();
-        listener = new NetworkListener(this, port);
+        listener = new NetworkListener(this,ip, port);
         this.handler = handler;
     }
 

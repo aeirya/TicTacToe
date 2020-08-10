@@ -12,10 +12,12 @@ public class NetworkListener {
     private boolean isRunning;
     private final ServerSocket serverListener;
     private final INetwork server;
+    private final String ip;
     private final int port;
 
-    public NetworkListener(INetwork server, int port) {
+    public NetworkListener(INetwork server, String ip, int port) {
         this.server = server;
+        this.ip = ip;
         this.port = port;
         serverListener = startServerListener();
     }
@@ -29,6 +31,7 @@ public class NetworkListener {
         }
     }
 
+    @Deprecated
     private void connectLocal(int port) {
         final String ip = "localhost";
         connect(ip, port);
@@ -48,7 +51,7 @@ public class NetworkListener {
 
     private void run() {
         isRunning = true;
-        connectLocal(port);
+        connect(ip, port);
         while(isRunning) {
             try {
                 final Socket socket = serverListener.accept();

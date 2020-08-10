@@ -39,14 +39,15 @@ public class ServerAPI {
         net.getResponse();
     }
 
-    public void login(String username, String password) {
+    public boolean login(String username, String password) {
         net.request(new LoginRequest(username, password));
         final Response response = net.getResponse();
         if (response.type == NetResponse.OK) {
             this.username = username;
             this.password = password;
+            return true;
         }
-        log(response);
+        return false;
     }
 
     public void logout() {

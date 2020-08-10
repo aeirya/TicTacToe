@@ -9,8 +9,8 @@ public class GameServer implements IRequestHandler {
     private final INetwork net;
     private final IRequestHandler core;
 
-    public GameServer(int port) {
-        net = new Network(port, this);
+    public GameServer(String ip, int port) {
+        net = new Network(ip, port, this);
         core = new RequestHandler(net);
     }
 
