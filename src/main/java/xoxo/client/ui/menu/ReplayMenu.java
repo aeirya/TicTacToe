@@ -1,10 +1,10 @@
-package xoxo.client.ui;
+package xoxo.client.ui.menu;
 
 import java.io.PrintWriter;
 
 import xoxo.client.net.ServerAPI;
-import xoxo.client.ui.command.BackToMainMenuCommand;
 import xoxo.client.ui.command.IMenuLauncher;
+import xoxo.client.ui.command.game.BackToMainMenuCommand;
 import xoxo.client.ui.command.replay.BackCommand;
 import xoxo.client.ui.command.replay.IReplayer;
 import xoxo.client.ui.command.replay.NextCommand;

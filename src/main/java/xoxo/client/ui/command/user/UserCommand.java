@@ -1,9 +1,10 @@
-package xoxo.client.ui.command;
+package xoxo.client.ui.command.user;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 import xoxo.client.ui.ICommand;
+import xoxo.client.ui.command.Command;
 
 public abstract class UserCommand extends Command {
     

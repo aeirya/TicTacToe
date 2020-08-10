@@ -11,7 +11,7 @@ import xoxo.net.request.game.BoardState;
 public class Board {
     
     private final int N = 7;
-    private final int WINNING_LIMIT = 2;
+    private final int WINNING_LIMIT = 4;
 
     private final List<Block> blocks;
 

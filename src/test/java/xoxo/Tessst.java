@@ -1,12 +1,12 @@
-package xoxo.test;
+package xoxo;
 
 import java.io.IOException;
 
 import xoxo.client.GameClient;
-import xoxo.client.net.ServerAPI;
 import xoxo.client.ui.CliGraphics;
-import xoxo.client.ui.GameMenu;
-import xoxo.net.request.game.GameState;
+// import xoxo.client.net.ServerAPI;
+// import xoxo.client.ui.menu.GameMenu;
+// import xoxo.net.request.game.GameState;
 import xoxo.server.ServerMain;
 
 public class Tessst {
@@ -43,37 +43,30 @@ public class Tessst {
         // read();
         
 
-
-        new Thread(() -> {
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            System.out.println("arrrrrr");
-            ServerAPI api = c.get();
-            api.play(1, 5);
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            System.out.println("arrrrrr");
-            api.play(1,6);
-        }
-        ).start();
+        // new Thread(() -> {
+        //     try {
+        //         Thread.sleep(7000);
+        //     } catch (InterruptedException e) {
+        //         e.printStackTrace();
+        //     }
+        //     System.out.println("arrrrrr");
+        //     ServerAPI api = c.get();
+        //     api.play(1, 5);
+        //     try {
+        //         Thread.sleep(7000);
+        //     } catch (InterruptedException e) {
+        //         e.printStackTrace();
+        //     }
+        //     System.out.println("arrrrrr");
+        //     api.play(1,6);
+        // }
+        // ).start();
         
-
 
         new CliGraphics(c2.get());
 
 
-
         // System.out.println(c.get().getUpdate());
-
-
 
 
         // c2.get().login("ali", "a");

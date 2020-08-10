@@ -1,4 +1,4 @@
-package xoxo.client.ui;
+package xoxo.client.ui.menu;
 
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -7,10 +7,10 @@ import java.util.stream.IntStream;
 import com.jakewharton.fliptables.FlipTableConverters;
 
 import xoxo.client.net.ServerAPI;
-import xoxo.client.ui.command.BackToMainMenuCommand;
 import xoxo.client.ui.command.IMenuLauncher;
-import xoxo.client.ui.command.PlayCommand;
-import xoxo.client.ui.command.ReplayCommand;
+import xoxo.client.ui.command.game.BackToMainMenuCommand;
+import xoxo.client.ui.command.game.PlayCommand;
+import xoxo.client.ui.command.game.ReplayCommand;
 import xoxo.game.Block;
 import xoxo.game.Player;
 import xoxo.game.Sign;
@@ -21,7 +21,7 @@ public class GameMenu extends Menu {
     private GameState state;
     private final IMenuLauncher launcher;
 
-    GameMenu(ServerAPI api, IMenuLauncher launcher) {
+    public GameMenu(ServerAPI api, IMenuLauncher launcher) {
         super(api);
         addCommand(new PlayCommand());
         addCommand(new BackToMainMenuCommand(launcher));

@@ -1,4 +1,4 @@
-package xoxo.client.ui.command;
+package xoxo.client.ui.command.user;
 
 import xoxo.client.net.ServerAPI;
 

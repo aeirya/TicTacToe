@@ -1,4 +1,4 @@
-package xoxo.client.ui;
+package xoxo.client.ui.menu;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import xoxo.client.net.ServerAPI;
+import xoxo.client.ui.ICommand;
 
 public abstract class Menu {
 

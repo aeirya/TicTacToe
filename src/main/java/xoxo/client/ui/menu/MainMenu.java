@@ -1,5 +1,5 @@
 
-package xoxo.client.ui;
+package xoxo.client.ui.menu;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import java.util.List;
 import com.jakewharton.fliptables.FlipTableConverters;
 
 import xoxo.client.net.ServerAPI;
-import xoxo.client.ui.command.FindGameCommand;
 import xoxo.client.ui.command.IMenuLauncher;
-import xoxo.client.ui.command.LogoutCommand;
+import xoxo.client.ui.command.mainmenu.FindGameCommand;
+import xoxo.client.ui.command.mainmenu.LogoutCommand;
 import xoxo.net.request.menu.ScoreRow;
 import xoxo.net.request.menu.ScorebaordState;
 import xoxo.server.score.Entry;
@@ -19,7 +19,7 @@ public class MainMenu extends Menu {
 
     private ScorebaordState scoreboard;
 
-    MainMenu(IMenuLauncher lnchr, ServerAPI api) {
+    public MainMenu(IMenuLauncher lnchr, ServerAPI api) {
         super(api);
         addCommand(new FindGameCommand(lnchr));
         addCommand(new LogoutCommand(lnchr));
